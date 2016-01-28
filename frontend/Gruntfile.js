@@ -55,13 +55,15 @@ module.exports = function(grunt) {
         files: ['app/**/*'],
         tasks: ['build']
       }
-    }
+    },
+    clean: ['build']
   });
 
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('build', ['jst', 'copy']);
   grunt.registerTask('default', ['build', 'connect']);
