@@ -1,17 +1,7 @@
-$(function() {
-  var todos = [
-    {
-      title: 'Pay bills',
-      completed: true
-    },
-    {
-      title: 'Pay credit card',
-      completed: false
-    }
-  ];
+var app = app || {};
 
-  _.each(todos, function(todo) {
-    var itemTemplate = window.JST["app/templates/item.html.jst"](todo)
-    $('.todo-list').append(itemTemplate)
-  });
+$(function() {
+  'use strict';
+
+  app.AppView.init();
 });

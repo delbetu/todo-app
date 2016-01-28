@@ -39,13 +39,6 @@ module.exports = function(grunt) {
             flatten: true,
             src: ['app/index.html'],
             dest: 'build/'
-          },
-          {
-            nonull: true,
-            expand: true,
-            flatten: true,
-            src: ['app/scripts/app.js'],
-            dest: 'build/scripts'
           }
         ]
       }
@@ -56,7 +49,13 @@ module.exports = function(grunt) {
         tasks: ['build']
       }
     },
-    clean: ['build']
+    clean: ['build'],
+    concat: {
+      dist: {
+        src: ['app/scripts/**/*.js'],
+        dest: 'build/scripts/app.js'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -64,7 +63,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
-  grunt.registerTask('build', ['jst', 'copy']);
+  grunt.registerTask('build', ['jst', 'concat', 'copy']);
   grunt.registerTask('default', ['build', 'connect']);
 };
