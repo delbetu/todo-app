@@ -1,0 +1,12 @@
+<%
+    var length = userList.length;
+    for (var index = 0; index < length; index++) {
+        var user = userList[index];
+%>
+        <tr>
+            <td><%= index %></td>
+            <td><%= user.firstName %></td>
+            <td><%= user.lastName %></td>
+            <td><%= user.email %></td>
+        </tr>
+<% } %>

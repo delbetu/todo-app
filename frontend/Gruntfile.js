@@ -7,10 +7,20 @@ module.exports = function(grunt) {
           base: 'build'
         }
       }
+    },
+    jst: {
+      compile: {
+        options: {},
+        files: {
+          "build/templates/templates.js": ["app/templates/**/*.html.jst", "app/*.html.jst"]
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-jst');
 
-  grunt.registerTask('default', []);
+  grunt.registerTask('build', ['jst']);
+  grunt.registerTask('default', ['build', 'connect']);
 };
