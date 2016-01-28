@@ -6,5 +6,6 @@ Simple frontend-backend application using backbone and rails.
 
 ```bash
 cd frontend
-grunt connect
+grunt build
+grunt connect (in new tab)
 ```

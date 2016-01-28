@@ -10,9 +10,8 @@ module.exports = function(grunt) {
     },
     jst: {
       compile: {
-        options: {},
         files: {
-          "build/templates/templates.js": ["app/templates/**/*.html.jst", "app/*.html.jst"]
+          "build/templates/templates.js": ["app/templates/**/*.html.jst"]
         }
       }
     },
@@ -33,8 +32,28 @@ module.exports = function(grunt) {
             cwd: 'node_modules/',
             src: ['todomvc-app-css/*.css'],
             dest: 'build/vendor'
+          },
+          {
+            nonull: true,
+            expand: true,
+            flatten: true,
+            src: ['app/index.html'],
+            dest: 'build/'
+          },
+          {
+            nonull: true,
+            expand: true,
+            flatten: true,
+            src: ['app/scripts/app.js'],
+            dest: 'build/scripts'
           }
         ]
+      }
+    },
+    watch: {
+      scripts: {
+        files: ['app/**/*'],
+        tasks: ['build']
       }
     }
   });
@@ -42,6 +61,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('build', ['jst', 'copy']);
   grunt.registerTask('default', ['build', 'connect']);
