@@ -26,6 +26,13 @@ module.exports = function(grunt) {
             cwd: 'node_modules/',
             src: ['**/backbone.js', '**/underscore.js', '**/jquery.js'],
             dest: 'build/vendor/'
+          },
+          {
+            nonull: true,
+            expand: true,
+            cwd: 'node_modules/',
+            src: ['todomvc-app-css/*.css'],
+            dest: 'build/vendor'
           }
         ]
       }

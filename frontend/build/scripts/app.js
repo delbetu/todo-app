@@ -1,25 +1,17 @@
 $(function() {
-  var sampleTemplate = window.JST["app/templates/sample.html.jst"]();
-  $("#content").html(sampleTemplate);
-
-  var usersData = [
+  var todos = [
     {
-      firstName: 'Mark',
-      lastName: 'Otto',
-      email: 'mark@example.com'
+      title: 'Pay bills',
+      completed: true
     },
     {
-      firstName: 'Jacob',
-      lastName: 'Thornton',
-      email: 'jacob@example.com'
-    },
-    {
-      firstName: 'Larry',
-      lastName: 'Bird',
-      email: 'lary@example.com'
+      title: 'Pay credit card',
+      completed: false
     }
   ];
 
-  var usersListTemplate = window.JST["app/templates/users_list.html.jst"]({ userList: usersData });
-  $("#content2").html(usersListTemplate);
+  _.each(todos, function(todo) {
+    var itemTemplate = window.JST["app/templates/item.html.jst"](todo)
+    $('.todo-list').append(itemTemplate)
+  });
 });
