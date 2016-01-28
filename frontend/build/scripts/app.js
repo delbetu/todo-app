@@ -1,6 +1,6 @@
-window.onload = function() {
+$(function() {
   var sampleTemplate = window.JST["app/templates/sample.html.jst"]();
-  document.getElementById("content").innerHTML = sampleTemplate;
+  $("#content").html(sampleTemplate);
 
   var usersData = [
     {
@@ -21,5 +21,5 @@ window.onload = function() {
   ];
 
   var usersListTemplate = window.JST["app/templates/users_list.html.jst"]({ userList: usersData });
-  document.getElementById("content2").innerHTML = usersListTemplate;
-};
+  $("#content2").html(usersListTemplate);
+});
