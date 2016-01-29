@@ -1,8 +1,10 @@
 var app = app || {};
 
+var ItemCollection = Backbone.Collection.extend();
+
 app.AppView = {
   init : function() {
-    var todos = [
+    var todos = new ItemCollection([
       {
         title: 'Pay bills',
         completed: true
@@ -11,10 +13,10 @@ app.AppView = {
         title: 'Pay credit card',
         completed: false
       }
-    ];
+    ]);
 
-    _.each(todos, function(todo) {
-      var itemTemplate = window.JST["app/templates/item.html.jst"](todo)
+    todos.each(function(todo) {
+      var itemTemplate = window.JST["app/templates/item.html.jst"](todo.toJSON())
       $('.todo-list').append(itemTemplate)
     });
   }
