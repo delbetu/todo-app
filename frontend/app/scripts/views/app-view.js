@@ -1,3 +1,5 @@
+var app = app || {};
+
 app.AppView = Backbone.View.extend({
 
   initialize: function() {
@@ -16,7 +18,7 @@ app.AppView = Backbone.View.extend({
 $(document).ready(function() {
   app.todos = new ItemCollection();
   var App = new app.AppView;
-  app.todos.add({ title: 'Pay bills', completed: true });
-  app.todos.add({ title: 'Pay credit card', completed: false });
+  app.todos.add(new app.Item({ title: 'Pay bills', completed: true }));
+  app.todos.add(new app.Item({ title: 'Pay credit card', completed: false }));
 });
 
