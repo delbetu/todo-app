@@ -1,21 +1,17 @@
 app.AppView = {
   init : function() {
-    var todos = new ItemCollection([
-      {
-        title: 'Pay bills',
-        completed: true
-      },
-      {
-        title: 'Pay credit card',
-        completed: false
-      }
-    ]);
-
-    todos.each(function(todo) {
+    app.todos.each(function(todo) {
       var itemTemplate = window.JST["app/templates/item.html.jst"](todo.toJSON())
       $('.todo-list').append(itemTemplate)
     });
   }
 }
 
-app.AppView.init();
+$(document).ready(function() {
+  app.todos = new ItemCollection();
+  app.todos.add({ title: 'Pay bills', completed: true });
+  app.todos.add({ title: 'Pay credit card', completed: false });
+
+  app.AppView.init();
+});
+
