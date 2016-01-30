@@ -1,4 +1,4 @@
-app.ItemView = Backbone.View.extend({
+ItemView = Backbone.View.extend({
 
   tagName: 'li',
 
