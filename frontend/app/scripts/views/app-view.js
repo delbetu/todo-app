@@ -1,7 +1,3 @@
-var app = app || {};
-
-var ItemCollection = Backbone.Collection.extend();
-
 app.AppView = {
   init : function() {
     var todos = new ItemCollection([
