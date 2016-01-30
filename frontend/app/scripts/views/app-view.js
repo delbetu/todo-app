@@ -7,8 +7,8 @@ app.AppView = Backbone.View.extend({
   render: function() {
     $('.todo-list').html('');
     app.todos.each(function(todo) {
-      var itemTemplate = window.JST["app/templates/item.html.jst"](todo.toJSON())
-      $('.todo-list').append(itemTemplate)
+      var item = new app.ItemView({ model: todo });
+      $('.todo-list').append(item.render().el)
     });
   }
 });
