@@ -21,3 +21,5 @@ app.AppView = {
     });
   }
 }
+
+app.AppView.init();
