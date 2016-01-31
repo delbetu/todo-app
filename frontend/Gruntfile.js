@@ -52,7 +52,10 @@ module.exports = function(grunt) {
     clean: ['build'],
     concat: {
       dist: {
-        src: ['app/scripts/**/*.js'],
+        src: ['app/scripts/models/**/*.js',
+              'app/scripts/collections/**/*.js',
+              'app/scripts/views/**/*.js',
+              'app/scripts/routers/**/*.js'],
         dest: 'build/scripts/app.js'
       }
     }
