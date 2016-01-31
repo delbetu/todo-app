@@ -1,2 +1,4 @@
-var ItemCollection = Backbone.Collection.extend();
+var ItemCollection = Backbone.Collection.extend({
+  model: Item
+});
 
