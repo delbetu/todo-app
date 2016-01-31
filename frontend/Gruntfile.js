@@ -23,7 +23,7 @@ module.exports = function(grunt) {
             expand: true,
             flatten: true,
             cwd: 'node_modules/',
-            src: ['**/backbone.js', '**/underscore.js', '**/jquery.js'],
+            src: ['**/backbone.js', '**/underscore.js', '**/dist/jquery.js'],
             dest: 'build/vendor/'
           },
           {
