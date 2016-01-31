@@ -5,11 +5,17 @@ ItemView = Backbone.View.extend({
   template: JST["app/templates/item.html.jst"],
 
   events: {
-    'click .toggle': 'toggleCompleted'
+    'click .toggle': 'toggleCompleted',
+    'click .destroy': 'clear'
   },
 
   toggleCompleted: function() {
     this.model.toggle();
+  },
+
+  clear: function() {
+    this.model.destroy();
+    this.remove();
   },
 
   render: function() {
