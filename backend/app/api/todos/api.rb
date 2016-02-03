@@ -4,12 +4,6 @@ module Todos
     format :json
     prefix :api
 
-    helpers do
-      def clean_params(params)
-        ActionController::Parameters.new(params)
-      end
-    end
-
     resource :items do
       desc 'Returns all items'
       get do
@@ -44,10 +38,8 @@ module Todos
       end
       route_param :id do
         put do
-          item_params = clean_params(params).require(:item).permit(:title, :completed)
-
           item = Item.find(params[:id])
-          item.update(item_params)
+          item.update(params[:item])
         end
       end
 
