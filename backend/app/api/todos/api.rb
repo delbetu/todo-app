@@ -7,7 +7,8 @@ module Todos
     resource :items do
       desc 'Returns all items'
       get do
-        Item.all
+        items = Item.all
+        present items
       end
 
       desc 'Returns an item.'
@@ -15,7 +16,8 @@ module Todos
         requires :id, type: Integer, desc: 'Item id.'
       end
       get ':id'do
-        Item.find(params[:id])
+        item = Item.find(params[:id])
+        present item
       end
 
       desc 'Creates an item.'
@@ -23,10 +25,12 @@ module Todos
         requires :title, type: String, desc: 'Your item title.'
       end
       post do
-        Item.create!({
+        item = Item.create!({
           title: params[:title],
           completed: false
         })
+
+        present item
       end
 
       desc 'Updates an existing item.'
@@ -37,6 +41,7 @@ module Todos
       put ':id' do
         item = Item.find(params[:id])
         item.update(params[:item])
+        present item
       end
 
       desc 'Deletes an item.'
@@ -44,7 +49,8 @@ module Todos
         requires :id, type: Integer, desc: 'Item id to be deleted.'
       end
       delete ':id' do
-        Item.find(params[:id]).destroy
+        item = Item.find(params[:id]).destroy
+        present item
       end
     end
   end
