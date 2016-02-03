@@ -14,10 +14,8 @@ module Todos
       params do
         requires :id, type: Integer, desc: 'Item id.'
       end
-      route_param :id do
-        get do
-          Item.find(params[:id])
-        end
+      get ':id'do
+        Item.find(params[:id])
       end
 
       desc 'Creates an item.'
@@ -36,21 +34,17 @@ module Todos
         requires :id, type: Integer, desc: 'Item id.'
         requires :item, type: Item
       end
-      route_param :id do
-        put do
-          item = Item.find(params[:id])
-          item.update(params[:item])
-        end
+      put ':id' do
+        item = Item.find(params[:id])
+        item.update(params[:item])
       end
 
       desc 'Deletes an item.'
       params do
         requires :id, type: Integer, desc: 'Item id to be deleted.'
       end
-      route_param :id do
-        delete do
-          Item.find(params[:id]).destroy
-        end
+      delete ':id' do
+        Item.find(params[:id]).destroy
       end
     end
   end
