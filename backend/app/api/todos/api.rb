@@ -22,13 +22,12 @@ module Todos
 
       desc 'Creates an item.'
       params do
-        requires :title, type: String, desc: 'Your item title.'
+        requires :item, type: Hash do
+          requires :title, type: String, desc: 'Your item title.'
+        end
       end
       post do
-        item = Item.create!({
-          title: params[:title],
-          completed: false
-        })
+        item = Item.create!(params[:item])
 
         present item
       end
@@ -36,7 +35,11 @@ module Todos
       desc 'Updates an existing item.'
       params do
         requires :id, type: Integer, desc: 'Item id.'
-        requires :item, type: Item
+        requires :item, type: Hash do
+          optional :title, type: String
+          optional :completed, type: Boolean
+          at_least_one_of :title, :completed
+        end
       end
       put ':id' do
         item = Item.find(params[:id])

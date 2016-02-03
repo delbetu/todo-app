@@ -22,7 +22,7 @@ describe "Todos API" do
   end
 
   it 'creates an item' do
-    post '/api/v1/items', { title: "Go to granny's home" }
+    post '/api/v1/items', { item: { title: "Go to granny's home" } }
 
     json = JSON.parse(response.body)
     expect(response).to be_success
@@ -31,9 +31,9 @@ describe "Todos API" do
   end
 
   it 'updates an existing item' do
-    Item.create(title: "Go to granny's home", completed: false)
+    item = Item.create(title: "Go to granny's home", completed: false)
 
-    put '/api/v1/items/1', { item: { title: 'new title', completed: true } }
+    put "/api/v1/items/#{item.id}", { item: { title: 'new title', completed: true } }
 
     item = Item.last
     expect(item.title).to eq('new title')
