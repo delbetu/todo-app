@@ -55,7 +55,8 @@ module.exports = function(grunt) {
         src: ['app/scripts/models/**/*.js',
               'app/scripts/collections/**/*.js',
               'app/scripts/views/**/*.js',
-              'app/scripts/routers/**/*.js'],
+              'app/scripts/routers/**/*.js',
+              'app/scripts/*.js'],
         dest: 'build/scripts/app.js'
       }
     }

@@ -1,15 +1,17 @@
 var ENTER_KEY = 13;
 
-AppView = Backbone.View.extend({
+GroupItemView = Backbone.View.extend({
 
   el: '.todoapp',
 
   initialize: function() {
+    this.collection = new ItemCollection();
+
     this.newItemInput = this.$('input.new-todo');
 
-    this.listenTo(todos, 'all', this.render)
+    this.listenTo(this.collection, 'all', this.render)
 
-    todos.fetch();
+    this.collection.fetch();
   },
 
   events: {
@@ -17,10 +19,11 @@ AppView = Backbone.View.extend({
   },
 
   render: function() {
-    $('.todo-list').html('');
-    todos.each(function(todo) {
+    var $element = this.$el;
+    $element.find('.todo-list').html('');
+    this.collection.each(function(todo) {
       var item = new ItemView({ model: todo });
-      $('.todo-list').append(item.render().el);
+      $element.find('.todo-list').append(item.render().el);
     });
   },
 
@@ -28,13 +31,8 @@ AppView = Backbone.View.extend({
     if (e.which !== ENTER_KEY) return;
     if (this.newItemInput.val() === '') return;
 
-    todos.create({ item: { title: this.newItemInput.val() } });
+    this.collection.create({ item: { title: this.newItemInput.val() } });
     this.newItemInput.val('');
   }
-});
-
-$(document).ready(function() {
-  todos = new ItemCollection();
-  var App = new AppView;
 });
 
