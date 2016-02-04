@@ -92,6 +92,7 @@ GEM
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-cors (0.4.0)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
     rack-test (0.6.3)
@@ -176,12 +177,10 @@ DEPENDENCIES
   grape-entity
   hashie-forbidden_attributes
   jbuilder (~> 2.0)
+  rack-cors
   rails (= 4.2.4)
   rspec-rails
   sdoc (~> 0.4.0)
   spring
   sqlite3
   web-console (~> 2.0)
-
-BUNDLED WITH
-   1.10.6

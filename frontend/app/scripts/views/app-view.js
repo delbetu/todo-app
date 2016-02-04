@@ -8,6 +8,8 @@ AppView = Backbone.View.extend({
     this.newItemInput = this.$('input.new-todo');
 
     this.listenTo(todos, 'all', this.render)
+
+    todos.fetch();
   },
 
   events: {
@@ -18,7 +20,7 @@ AppView = Backbone.View.extend({
     $('.todo-list').html('');
     todos.each(function(todo) {
       var item = new ItemView({ model: todo });
-      $('.todo-list').append(item.render().el)
+      $('.todo-list').append(item.render().el);
     });
   },
 
@@ -34,7 +36,5 @@ AppView = Backbone.View.extend({
 $(document).ready(function() {
   todos = new ItemCollection();
   var App = new AppView;
-  todos.add(new Item({ title: 'Pay bills', completed: true }));
-  todos.add(new Item({ title: 'Pay credit card', completed: false }));
 });
 
