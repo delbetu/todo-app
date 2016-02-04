@@ -7,6 +7,6 @@ Item = Backbone.Model.extend({
   },
 
   toggle: function() {
-    this.set('completed', !this.get('completed'));
+    this.save({ item: { 'completed': !this.get('completed') } });
   }
 });

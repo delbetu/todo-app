@@ -28,7 +28,7 @@ AppView = Backbone.View.extend({
     if (e.which !== ENTER_KEY) return;
     if (this.newItemInput.val() === '') return;
 
-    todos.add({ title: this.newItemInput.val() });
+    todos.create({ item: { title: this.newItemInput.val() } });
     this.newItemInput.val('');
   }
 });
