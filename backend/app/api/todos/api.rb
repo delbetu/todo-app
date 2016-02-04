@@ -4,6 +4,10 @@ module Todos
     format :json
     prefix :api
 
+    rescue_from ActiveRecord::RecordNotFound do |e|
+      error_response(message: e.message, status: 404)
+    end
+
     resource :items do
       desc 'Returns all items'
       get do
