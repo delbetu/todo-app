@@ -29,6 +29,13 @@ module.exports = function(grunt) {
           {
             nonull: true,
             expand: true,
+            flatten: true,
+            src: ['app/helpers/*.js'],
+            dest: 'build/helpers'
+          },
+          {
+            nonull: true,
+            expand: true,
             cwd: 'node_modules/',
             src: ['todomvc-app-css/*.css'],
             dest: 'build/vendor'
