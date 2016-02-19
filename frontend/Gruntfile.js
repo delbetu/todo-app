@@ -44,6 +44,13 @@ module.exports = function(grunt) {
             nonull: true,
             expand: true,
             flatten: true,
+            src: ['app/stylesheets/*.css'],
+            dest: 'build/stylesheets'
+          },
+          {
+            nonull: true,
+            expand: true,
+            flatten: true,
             src: ['app/index.html'],
             dest: 'build/'
           }
