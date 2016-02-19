@@ -5,7 +5,8 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    new GroupItemView;
+    itemsView = new GroupItemView;
+    $('.todoapp').html(itemsView.render().el);
   },
 
   login: function() {

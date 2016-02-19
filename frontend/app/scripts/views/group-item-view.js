@@ -1,8 +1,12 @@
 var ENTER_KEY = 13;
 
 GroupItemView = Backbone.View.extend({
+  tagName: 'section',
 
-  el: '.todoapp',
+  className: 'todoapp',
+
+  template: JST["app/templates/group-item.html.jst"],
+
 
   initialize: function() {
     this.collection = new ItemCollection();
@@ -19,12 +23,15 @@ GroupItemView = Backbone.View.extend({
   },
 
   render: function() {
-    var $element = this.$el;
-    $element.find('.todo-list').html('');
+    var $template = $(this.template());
+
     this.collection.each(function(todo) {
       var item = new ItemView({ model: todo });
-      $element.find('.todo-list').append(item.render().el);
+      $template.find('.todo-list').append(item.render().el);
     });
+
+    this.$el.html($template);
+    return this;
   },
 
   createOnEnter: function(e) {
