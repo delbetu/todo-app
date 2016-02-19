@@ -54,6 +54,10 @@ module Todos
     end
 
     resource :items do
+      before do
+        authorize!
+      end
+
       desc 'Returns all items'
       get do
         items = Item.all
