@@ -25,7 +25,7 @@ var LoginView = Backbone.View.extend({
 
       success: function(data) {
         console.log(data.notice);
-        Backbone.history.navigate('');
+        Backbone.history.navigate('', { trigger: true });
       },
 
       error: function(data) {
