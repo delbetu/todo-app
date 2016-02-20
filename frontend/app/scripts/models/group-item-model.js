@@ -3,5 +3,9 @@ GroupItem = Backbone.Model.extend({
     return {
       listTitle: ''
     }
+  },
+
+  parse: function(response, options) {
+     return { listTitle: response.list_title };
   }
 });

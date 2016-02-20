@@ -11,12 +11,8 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    var groupItems = new GroupItemCollection;
-    groupItems.push(new GroupItem({ listTitle: 'Item menu 1' }));
-    groupItems.push(new GroupItem({ listTitle: 'Item menu 2' }));
-
     var menuItems = new GroupItemCollectionView({
-      collection: groupItems,
+      collection: new GroupItemCollection,
       selectedIndex: 0
     });
 
