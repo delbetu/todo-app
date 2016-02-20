@@ -13,17 +13,18 @@ var TodoRouter = Backbone.Router.extend({
   index: function() {
     itemsView = new GroupItemView;
 
-    var menuItem = new GroupItemCardView;
+    var groupItem = new GroupItem({ listTitle: 'Item menu 1' });
+    var menuItem = new GroupItemCardView({ model: groupItem });
     $("body nav.nav").append(menuItem.render().el);
 
-    var menuItem = new GroupItemCardView;
+    var groupItem = new GroupItem({ listTitle: 'Item menu 2' });
+    var menuItem = new GroupItemCardView({ model: groupItem });
     $("body nav.nav").append(menuItem.render().el);
 
-    var menuItem = new GroupItemCardView;
+    var groupItem = new GroupItem({ listTitle: 'Item menu 3' });
+    var menuItem = new GroupItemCardView({ model: groupItem });
     $("body nav.nav").append(menuItem.render().el);
 
-    var menuItem = new GroupItemCardView;
-    $("body nav.nav").append(menuItem.render().el);
 
     $('#main-content').replaceWith(itemsView.render().el);
   },
