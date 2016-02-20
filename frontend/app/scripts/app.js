@@ -1,3 +1,9 @@
+$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+  if (jqxhr.status === 403) {
+    Backbone.history.navigate('login', { trigger: true });
+  }
+});
+
 var TodoRouter = Backbone.Router.extend({
   routes: {
     ""      : "index",
