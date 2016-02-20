@@ -13,27 +13,7 @@ var LoginView = Backbone.View.extend({
     e.preventDefault();
 
     var credentials = { email: this.$('#email').val(), password: this.$('#password').val() };
-
-    $.ajax({
-      url: "http://localhost:3000/api/v1/user_session/",
-
-      type: 'POST', async: false,
-
-      dataType: 'json',
-
-      xhrFields: { withCredentials: true },
-
-      success: function(data) {
-        console.log(data.notice);
-        Backbone.history.navigate('', { trigger: true });
-      },
-
-      error: function(data) {
-        console.log(data);
-      },
-
-      data: credentials
-    });
+    session.login(credentials);
   },
 
   render: function() {

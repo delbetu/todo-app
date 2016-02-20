@@ -22,6 +22,8 @@ var TodoRouter = Backbone.Router.extend({
 });
 
 $(document).ready(function() {
+  session = new SessionModel();
+
   new TodoRouter
   Backbone.history.start();
 });
