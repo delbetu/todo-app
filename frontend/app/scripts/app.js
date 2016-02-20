@@ -6,12 +6,12 @@ var TodoRouter = Backbone.Router.extend({
 
   index: function() {
     itemsView = new GroupItemView;
-    $('.todoapp').html(itemsView.render().el);
+    $('#main-content').replaceWith(itemsView.render().el);
   },
 
   login: function() {
     loginView = new LoginView();
-    $('body').html(loginView.render().el);
+    $('#main-content').replaceWith(loginView.render().el);
   }
 });
 

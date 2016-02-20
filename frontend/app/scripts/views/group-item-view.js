@@ -3,6 +3,8 @@ var ENTER_KEY = 13;
 GroupItemView = Backbone.View.extend({
   tagName: 'section',
 
+  id: 'main-content',
+
   className: 'todoapp',
 
   template: JST["app/templates/group-item.html.jst"],

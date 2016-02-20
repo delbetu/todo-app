@@ -1,6 +1,10 @@
 var LoginView = Backbone.View.extend({
   template: JST["app/templates/login.html.jst"],
 
+  id: 'main-content',
+
+  className: 'container',
+
   events: {
     'click .button-container button': 'login'
   },
