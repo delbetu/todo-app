@@ -22,9 +22,8 @@ var TodoRouter = Backbone.Router.extend({
     $("body nav.nav").append(menuItem.render().el);
 
     var groupItem = new GroupItem({ listTitle: 'Item menu 3' });
-    var menuItem = new GroupItemCardView({ model: groupItem });
+    var menuItem = new GroupItemCardView({ model: groupItem, selected: true});
     $("body nav.nav").append(menuItem.render().el);
-
 
     $('#main-content').replaceWith(itemsView.render().el);
   },
