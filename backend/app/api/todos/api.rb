@@ -109,5 +109,16 @@ module Todos
         present item
       end
     end
+
+    resource :group_items do
+      before do
+        authorize!
+      end
+
+      desc 'Returns all group_items'
+      get do
+        GroupItem.all
+      end
+    end
   end
 end
