@@ -117,7 +117,8 @@ module Todos
 
       desc 'Returns all group_items'
       get do
-        GroupItem.all
+        group_items = GroupItem.all
+        present group_items
       end
     end
   end
