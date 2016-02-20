@@ -11,20 +11,18 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    itemsView = new GroupItemView;
+    var groupItems = new GroupItemCollection;
+    groupItems.push(new GroupItem({ listTitle: 'Item menu 1' }));
+    groupItems.push(new GroupItem({ listTitle: 'Item menu 2' }));
 
-    var groupItem = new GroupItem({ listTitle: 'Item menu 1' });
-    var menuItem = new GroupItemCardView({ model: groupItem });
-    $("body nav.nav").append(menuItem.render().el);
+    var menuItems = new GroupItemCollectionView({
+      collection: groupItems,
+      selectedIndex: 0
+    });
 
-    var groupItem = new GroupItem({ listTitle: 'Item menu 2' });
-    var menuItem = new GroupItemCardView({ model: groupItem });
-    $("body nav.nav").append(menuItem.render().el);
+    $('nav#left-menu').replaceWith(menuItems.render().el);
 
-    var groupItem = new GroupItem({ listTitle: 'Item menu 3' });
-    var menuItem = new GroupItemCardView({ model: groupItem, selected: true});
-    $("body nav.nav").append(menuItem.render().el);
-
+    var itemsView = new GroupItemView;
     $('#main-content').replaceWith(itemsView.render().el);
   },
 
