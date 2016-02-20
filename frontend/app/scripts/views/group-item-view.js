@@ -24,6 +24,14 @@ GroupItemView = Backbone.View.extend({
     'keypress .new-todo': 'createOnEnter'
   },
 
+  createOnEnter: function(e) {
+    if (e.which !== ENTER_KEY) return;
+    if (this.newItemInput.val() === '') return;
+
+    this.collection.create({ item: { title: this.newItemInput.val() } });
+    this.newItemInput.val('');
+  },
+
   render: function() {
     var $template = $(this.template());
 
@@ -34,14 +42,6 @@ GroupItemView = Backbone.View.extend({
 
     this.$el.html($template);
     return this;
-  },
-
-  createOnEnter: function(e) {
-    if (e.which !== ENTER_KEY) return;
-    if (this.newItemInput.val() === '') return;
-
-    this.collection.create({ item: { title: this.newItemInput.val() } });
-    this.newItemInput.val('');
   }
 });
 
