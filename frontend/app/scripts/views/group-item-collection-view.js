@@ -32,7 +32,7 @@ GroupItemCollectionView = Backbone.View.extend({
   },
 
   render: function() {
-    var nav = $(this.template());
+    var $template = $(this.template());
 
     var that = this;
     this.collection.each(function(groupItem, index) {
@@ -44,10 +44,11 @@ GroupItemCollectionView = Backbone.View.extend({
         selected: selected
       });
 
-      nav.prepend(groupItemCard.render().el);
+      $template.append(groupItemCard.render().el);
     });
 
-    this.$el.html(nav.html());
+
+    this.$el.html($template);
 
     return this;
   }
