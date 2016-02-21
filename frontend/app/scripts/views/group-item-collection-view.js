@@ -1,9 +1,11 @@
 GroupItemCollectionView = Backbone.View.extend({
-  id: 'left-menu',
-
   tagName: 'nav',
 
   className: 'nav',
+
+  id: 'left-menu',
+
+  template: JST["app/templates/group-item-collection.html.jst"],
 
   initialize: function(options) {
     this.selectedIndex = options.selectedIndex
@@ -14,7 +16,7 @@ GroupItemCollectionView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html('');
+    var nav = $(this.template());
 
     var that = this;
     this.collection.each(function(groupItem, index) {
@@ -26,8 +28,10 @@ GroupItemCollectionView = Backbone.View.extend({
         selected: selected
       });
 
-      that.$el.append(groupItemCard.render().el);
+      nav.prepend(groupItemCard.render().el);
     });
+
+    this.$el.html(nav.html());
 
     return this;
   }
