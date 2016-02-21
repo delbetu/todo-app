@@ -1,11 +1,7 @@
 GroupItem = Backbone.Model.extend({
   defaults: function() {
     return {
-      listTitle: ''
+      list_title: ''
     }
-  },
-
-  parse: function(response, options) {
-     return { listTitle: response.list_title };
   }
 });
