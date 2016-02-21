@@ -1,3 +1,5 @@
+var ENTER_KEY = 13;
+
 GroupItemCollectionView = Backbone.View.extend({
   tagName: 'nav',
 
@@ -13,6 +15,20 @@ GroupItemCollectionView = Backbone.View.extend({
     this.listenTo(this.collection, 'all', this.render);
 
     this.collection.fetch();
+  },
+
+  events: {
+    'keypress .create input' : 'createOnEnter'
+  },
+
+  createOnEnter: function(e) {
+    var input = this.$('.create input');
+
+    if (e.which !== ENTER_KEY) return;
+    if (input === '') return;
+
+    this.collection.create({ list_title: input.val() });
+    input.val('');
   },
 
   render: function() {
