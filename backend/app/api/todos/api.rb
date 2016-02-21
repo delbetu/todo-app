@@ -132,12 +132,10 @@ module Todos
 
       desc 'Creates a group_item.'
       params do
-        requires :group_item, type: Hash do
-          requires :list_title, type: String, desc: 'group_item title.'
-        end
+        requires :list_title, type: String, desc: 'group_item title.'
       end
       post do
-        group_item = GroupItem.create!(params[:group_item])
+        group_item = GroupItem.create!(params.to_h)
 
         present group_item
       end
@@ -145,13 +143,12 @@ module Todos
       desc 'Updates an existing group_item.'
       params do
         requires :id, type: Integer, desc: 'Group item id.'
-        requires :group_item, type: Hash do
-          requires :list_title, type: String
-        end
+        requires :list_title, type: String
       end
       put ':id' do
         group_item = GroupItem.find(params[:id])
-        group_item.update(params[:group_item])
+
+        group_item.update(params.to_h)
         present group_item
       end
 
