@@ -14,7 +14,7 @@ var SessionModel = Backbone.Model.extend({
     var that = this;
     var successCallback =
           function(data) {
-            that.set({ auth: true });
+            that.set({ auth: true, id: '' });
             Backbone.history.navigate('', { trigger: true });
           };
 
@@ -25,8 +25,9 @@ var SessionModel = Backbone.Model.extend({
     this.destroy({
       success: function (model, response) {
         model.clear();
-        model.set({ auth: false });
+        model.set({ auth: false, id: null });
       }
     });
+    Backbone.history.navigate('login', { trigger: true });
   },
 });

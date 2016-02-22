@@ -7,6 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body header .logout button {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  color: rgba(175, 47, 47, 0.7);
+  cursor: pointer;
+}
+
 /* Pen Title */
 .pen-title {
   padding: 50px 0;
