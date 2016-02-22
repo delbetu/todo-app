@@ -72,6 +72,7 @@ DELETE /group_item/:group_id/:id
 ### Frontend
 * Refactor html
 * Hightlight selected menu item
+* When selecting a menu item Make the title of the list to change (now says 'todos')
 
 ### Backend
 * Build a login helper method for testing API
