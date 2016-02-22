@@ -11,13 +11,9 @@ GroupItemView = Backbone.View.extend({
 
 
   initialize: function() {
-    this.collection = new ItemCollection();
-
     this.newItemInput = this.$('input.new-todo');
 
-    this.listenTo(this.collection, 'all', this.render)
-
-    this.collection.fetch();
+    this.listenTo(this.collection, 'all', this.render);
   },
 
   events: {

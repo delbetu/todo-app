@@ -8,7 +8,15 @@ GroupItemCardView = Backbone.View.extend({
   },
 
   events: {
-    'click .destroy' : 'clear'
+    'click .destroy' : 'clear',
+       'click label' : 'selectGroupItem'
+  },
+
+  selectGroupItem: function() {
+    var itemsView = new GroupItemView({
+      collection: this.model.attributes.list_items
+    });
+    $('#main-content').replaceWith(itemsView.render().el)
   },
 
   clear: function() {

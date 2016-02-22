@@ -17,9 +17,6 @@ var TodoRouter = Backbone.Router.extend({
     });
 
     $('nav#left-menu').replaceWith(menuItems.render().el);
-
-    var itemsView = new GroupItemView;
-    $('#main-content').replaceWith(itemsView.render().el);
   },
 
   login: function() {

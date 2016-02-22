@@ -59,8 +59,8 @@ module Todos
       end
 
       desc 'Returns all items'
-      get do
-        items = Item.all
+      get ':group_item_id' do
+        items = GroupItem.find(params[:group_item_id]).list_items
         present items
       end
 
@@ -68,7 +68,7 @@ module Todos
       params do
         requires :id, type: Integer, desc: 'Item id.'
       end
-      get ':id'do
+      get ':id' do
         item = Item.find(params[:id])
         present item
       end
