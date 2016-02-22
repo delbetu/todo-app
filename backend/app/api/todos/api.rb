@@ -62,7 +62,8 @@ module Todos
 
           desc 'Returns all items'
           get do
-            items = GroupItem.find(params[:group_item_id]).list_items
+            group_items = current_user.group_items
+            items = group_items.find(params[:group_item_id]).list_items
             present items
           end
 
@@ -81,7 +82,7 @@ module Todos
             requires :title, type: String, desc: 'Your item title.'
           end
           post do
-            group_item = GroupItem.find(params[:group_item_id])
+            group_item = current_user.group_items.find(params[:group_item_id])
             item = group_item.list_items.create!(params.to_h)
 
             present item
@@ -117,10 +118,9 @@ module Todos
         authorize!
       end
 
-      desc 'Returns all group_items'
+      desc "Returns user's group_items"
       get do
-        group_items = GroupItem.all
-        present group_items
+        present current_user.group_items
       end
 
       desc 'Returns a group_item.'
@@ -128,7 +128,7 @@ module Todos
         requires :id, type: Integer, desc: 'Group item id.'
       end
       get ':id'do
-        group_item = GroupItem.find(params[:id])
+        group_item = current_user.group_items.find(params[:id])
         present group_item
       end
 
@@ -137,7 +137,7 @@ module Todos
         requires :list_title, type: String, desc: 'group_item title.'
       end
       post do
-        group_item = GroupItem.create!(params.to_h)
+        group_item = current_user.group_items.create!(params.to_h)
 
         present group_item
       end
@@ -148,7 +148,7 @@ module Todos
         requires :list_title, type: String
       end
       put ':id' do
-        group_item = GroupItem.find(params[:id])
+        group_item = current_user.group_items.find(params[:id])
 
         group_item.update(params.to_h)
         present group_item
@@ -159,7 +159,7 @@ module Todos
         requires :id, type: Integer, desc: 'Group item id to be deleted.'
       end
       delete ':id' do
-        group_item = GroupItem.find(params[:id]).destroy
+        group_item = current_user.group_items.find(params[:id]).destroy
         present group_item
       end
     end
