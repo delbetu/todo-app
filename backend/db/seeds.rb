@@ -8,9 +8,11 @@
 
 User.create(email: 'admin@todo.com', password: 'admin')
 
-Item.create(title: "Go to granny's home", completed: true)
-Item.create(title: "Do the dishes", completed: false)
-Item.create(title: "Pay bills", completed: false)
+g1 = GroupItem.create(list_title: "Work tasks")
+g1.list_items.create(title: "Pay bills",           completed: false)
+g1.list_items.create(title: "Talk with Ben",       completed: false)
 
-GroupItem.create(list_title: "Work tasks")
-GroupItem.create(list_title: "Home tasks")
+g2 = GroupItem.create(list_title: "Home tasks")
+g2.list_items.create(title: "Do the dishes",       completed: false)
+g2.list_items.create(title: "Go to granny's home", completed: true)
+g2.list_items.create(title: "Cook a pie",          completed: false)
