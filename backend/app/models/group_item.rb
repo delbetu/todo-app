@@ -1,5 +1,6 @@
 class GroupItem < ActiveRecord::Base
   has_many :list_items, dependent: :destroy, class_name: "Item"
+  belongs_to :user
 
   def entity
     Entity.new(self)
