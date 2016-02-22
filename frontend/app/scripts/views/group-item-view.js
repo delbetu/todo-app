@@ -9,9 +9,7 @@ GroupItemView = Backbone.View.extend({
 
   template: JST["app/templates/group-item.html.jst"],
 
-
   initialize: function() {
-    this.newItemInput = this.$('input.new-todo');
 
     this.listenTo(this.collection, 'all', this.render);
   },
@@ -22,10 +20,12 @@ GroupItemView = Backbone.View.extend({
 
   createOnEnter: function(e) {
     if (e.which !== ENTER_KEY) return;
-    if (this.newItemInput.val() === '') return;
 
-    this.collection.create({ item: { title: this.newItemInput.val() } });
-    this.newItemInput.val('');
+    var newItemInput = this.$('input.new-todo');
+    if (newItemInput.val() === '') return;
+
+    this.collection.create({ title: newItemInput.val() });
+    newItemInput.val('');
   },
 
   render: function() {

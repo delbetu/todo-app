@@ -9,7 +9,7 @@ GroupItem = Backbone.Model.extend({
   parse: function(response) {
     response.list_items = new ItemCollection(
       response.list_items,
-      { group_item_id: this.attributes.id }
+      { group_item_id: response.id }
     );
     return response;
   }
