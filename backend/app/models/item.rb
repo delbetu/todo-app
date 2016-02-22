@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+  belongs_to :group_item
+
   def entity
     Entity.new(self)
   end
