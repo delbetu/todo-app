@@ -12,4 +12,4 @@ use Rack::Cors do
       methods: [:get, :post, :delete, :put, :patch, :options]
   end
 end
-run Todos::API
+run API
