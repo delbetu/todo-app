@@ -18,3 +18,5 @@
 **/.keep
 .byebug_history
 *.swp
+*.un~
+tags
