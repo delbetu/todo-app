@@ -76,5 +76,4 @@ DELETE /group_item/:group_id/:id
 
 ### Backend
 * Build a login helper method for testing API
-* Fix specs for items API
 * Write specs for group_item API
