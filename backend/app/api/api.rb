@@ -5,22 +5,12 @@ class API < Grape::API
   prefix :api
 
   helpers do
-    def session
-      env['rack.session']
-    end
-
-    def current_user=(user)
-      session[:user_id] = user.nil? ? nil : user.id
-    end
-
-    def current_user
-      User.find(session[:user_id]) if session[:user_id]
-    end
-
     def authorize!
       error!('401 Unauthorized', 401) unless current_user
     end
   end
+
+  helpers SessionHelper
 
   rescue_from ActiveRecord::RecordNotFound do |e|
     error_response(message: e.message, status: 404)
