@@ -51,7 +51,7 @@ module.exports = function(grunt) {
             nonull: true,
             expand: true,
             flatten: true,
-            src: ['app/index.html'],
+            src: ['app/index.html', 'app/favicon.ico'],
             dest: 'build/'
           }
         ]
