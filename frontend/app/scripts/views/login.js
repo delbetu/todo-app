@@ -1,5 +1,5 @@
 var LoginView = Backbone.View.extend({
-  template: JST["app/templates/login.html.jst"],
+  template: JST["app/templates/login.html"],
 
   id: 'main-content',
 

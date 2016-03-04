@@ -7,7 +7,7 @@ GroupItemCollectionView = Backbone.View.extend({
 
   id: 'left-menu',
 
-  template: JST["app/templates/group-item-collection.html.jst"],
+  template: JST["app/templates/group-item-collection.html"],
 
   initialize: function(options) {
     this.selectedIndex = options.selectedIndex

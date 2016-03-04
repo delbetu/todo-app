@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     jst: {
       compile: {
         files: {
-          "build/templates/templates.js": ["app/templates/**/*.html.jst"]
+          "build/templates/templates.js": ["app/templates/**/*.html"]
         }
       }
     },

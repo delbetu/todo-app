@@ -1,5 +1,5 @@
 GroupItemCardView = Backbone.View.extend({
-  template: JST["app/templates/group-item-card.html.jst"],
+  template: JST["app/templates/group-item-card.html"],
 
   className: 'nav__item',
 

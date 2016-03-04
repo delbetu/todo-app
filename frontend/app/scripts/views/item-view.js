@@ -2,7 +2,7 @@ ItemView = Backbone.View.extend({
 
   tagName: 'li',
 
-  template: JST["app/templates/item.html.jst"],
+  template: JST["app/templates/item.html"],
 
   events: {
     'click .toggle': 'toggleCompleted',

@@ -7,7 +7,7 @@ GroupItemView = Backbone.View.extend({
 
   className: 'todoapp',
 
-  template: JST["app/templates/group-item.html.jst"],
+  template: JST["app/templates/group-item.html"],
 
   initialize: function() {
 
