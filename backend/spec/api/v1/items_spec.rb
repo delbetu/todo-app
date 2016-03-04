@@ -1,17 +1,11 @@
 require 'rails_helper'
 
-def login
-  User.create(email: 'test@todo.com', password: 'admin')
-end
-
 describe "Todos API" do
   let(:item) { Item.create(title: "Go to granny's home", completed: false) }
   let(:group_item) { GroupItem.create(list_title: 'Things to do', list_items: [ item ]) }
   let(:user) { login }
 
   before do
-    allow_any_instance_of(SessionHelper).to receive(:current_user) { user }
-
     user.group_items = [ group_item ]
     user.save
   end

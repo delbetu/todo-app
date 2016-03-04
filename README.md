@@ -75,5 +75,4 @@ DELETE /group_item/:group_id/:id
 * When selecting a menu item Make the title of the list to change (now says 'todos')
 
 ### Backend
-* Build a login helper method for testing API
 * Write specs for group_item API
