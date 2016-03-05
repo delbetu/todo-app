@@ -71,4 +71,3 @@ DELETE /group_item/:group_id/:id
 
 ### Frontend
 * Refactor html
-* When selecting a menu item Make the title of the list to change (now says 'todos')

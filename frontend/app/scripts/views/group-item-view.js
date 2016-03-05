@@ -9,8 +9,8 @@ GroupItemView = Backbone.View.extend({
 
   template: JST["app/templates/group-item.html"],
 
-  initialize: function() {
-
+  initialize: function(options) {
+    this.title = options['title'];
     this.listenTo(this.collection, 'all', this.render);
   },
 
@@ -29,7 +29,7 @@ GroupItemView = Backbone.View.extend({
   },
 
   render: function() {
-    var $template = $(this.template());
+    var $template = $(this.template({ title: this.title }));
 
     this.collection.each(function(todo) {
       var item = new ItemView({ model: todo });

@@ -10,7 +10,8 @@ GroupItemCardView = Backbone.View.extend({
 
   selectGroupItem: function() {
     var itemsView = new GroupItemView({
-      collection: this.model.attributes.list_items
+      collection: this.model.attributes.list_items,
+      title: this.model.attributes.list_title
     });
 
     this.trigger('groupItemSelected', this.el);
