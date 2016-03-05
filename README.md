@@ -52,7 +52,7 @@ Attributes list_title, list_items
 ```
 GET    /group_items
 GET    /group_items/:id
-POST   /group_items 
+POST   /group_items
 PUT    /group_items/:id
 DELETE /group_items/:id
 ```
@@ -69,5 +69,8 @@ DELETE /group_item/:group_id/:id
 
 ## Pending tasks
 
-### Frontend
-* Refactor html
+* Add start/stop button to task so you can track time of each task
+* Remove already done tasks at the beginning of the day
+* Add facebook authentication
+* Add capistrano to allow deploying
+* Refactor html + css
