@@ -3,10 +3,6 @@ GroupItemCardView = Backbone.View.extend({
 
   className: 'nav__item',
 
-  initialize: function(options) {
-    this.selected = options.selected
-  },
-
   events: {
     'click .destroy' : 'clear',
        'click label' : 'selectGroupItem'
@@ -16,6 +12,9 @@ GroupItemCardView = Backbone.View.extend({
     var itemsView = new GroupItemView({
       collection: this.model.attributes.list_items
     });
+
+    this.trigger('groupItemSelected', this.el);
+
     $('#main-content').replaceWith(itemsView.render().el)
   },
 
@@ -25,10 +24,6 @@ GroupItemCardView = Backbone.View.extend({
   },
 
   render: function() {
-    if (this.selected) {
-      this.el.classList.add("current")
-    }
-
     this.$el.html(this.template(this.model.toJSON()));
 
     return this;

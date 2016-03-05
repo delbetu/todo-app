@@ -31,22 +31,28 @@ GroupItemCollectionView = Backbone.View.extend({
     input.val('');
   },
 
+  groupItemSelectedCallback: function(element) {
+    this.$el.find('.nav__item').removeClass('current');
+    $(element).addClass('current');
+  },
+
   render: function() {
     var $template = $(this.template());
 
     var that = this;
     this.collection.each(function(groupItem, index) {
-      var selected = (that.selectedIndex !== 'undefined'
-                       && index === that.selectedIndex);
-
       var groupItemCard = new GroupItemCardView({
-        model: groupItem,
-        selected: selected
+        model: groupItem
       });
+
+      that.listenTo(
+        groupItemCard,
+        'groupItemSelected',
+        that.groupItemSelectedCallback
+        );
 
       $template.append(groupItemCard.render().el);
     });
-
 
     this.$el.html($template);
 
