@@ -15,6 +15,15 @@ body header .logout button {
   cursor: pointer;
 }
 
+.todoapp h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    height: 123px;
+    line-height: initial;
+    margin-top: 31px;
+    text-overflow: ellipsis;
+}
+
 /* Pen Title */
 .pen-title {
   padding: 50px 0;
