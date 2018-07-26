@@ -3,7 +3,7 @@
 Simple frontend-backend application using backbone and rails 4 with grape.
 
 
-##Pre-requisites
+## Pre-requisites
 Have npm and ruby installed.
 Have rails 4 and grunt-cli installed.
 
