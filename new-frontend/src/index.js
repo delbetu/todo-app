@@ -1,7 +1,8 @@
 import _ from 'lodash'
 import $ from 'jquery'
 import Backbone from 'backbone'
-import coso from './demo.html'
+import './stylesheets/menu.css'
+import './stylesheets/style.css'
 
 function component() {
   const element = document.createElement('div');
