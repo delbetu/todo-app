@@ -1,3 +1,6 @@
 *.un~
 frontend/node_modules
 new-frontend/node_modules
+log/developement.log
+log/*.log
+.sqlite3
