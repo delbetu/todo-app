@@ -1,9 +1,9 @@
 class V1::UserSessionsController < ApplicationController
   # TODO: Refactor
   def create
-    params.require(:email)
-    params.require(:password)
-    filtered_params = params.permit(:email, :password)
+    filtered_params = params.require(:user_session).permit(:email, :password)
+    email = filtered_params.require(:email)
+    password = filtered_params.require(:password)
 
     token = request.headers['Authorization']
     decoded_token = decode(token)
@@ -15,7 +15,7 @@ class V1::UserSessionsController < ApplicationController
       return render json: payload, status: status
     end
 
-    user = User.authenticate(filtered_params[:email], filtered_params[:password])
+    user = User.authenticate(email, password)
 
     if user
       payload, status = { notice: 'User logged in', token: encode(user.id) }, 200
