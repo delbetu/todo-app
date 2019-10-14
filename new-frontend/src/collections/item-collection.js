@@ -1,4 +1,6 @@
-var ItemCollection = Backbone.Collection.extend({
+import Item from '../models/item-model.js'
+
+let ItemCollection = Backbone.Collection.extend({
   model: Item,
   url: function() {
     var url = 'http://localhost:3000/api/v1/group_item/';
@@ -14,3 +16,4 @@ var ItemCollection = Backbone.Collection.extend({
   }
 });
 
+export default ItemCollection

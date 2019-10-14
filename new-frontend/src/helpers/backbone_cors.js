@@ -1,3 +1,4 @@
+// TODO: Do we need this anonymous function call ?
 (function() {
 
   var proxiedSync = Backbone.sync;
@@ -10,6 +11,7 @@
     }
 
     if (!options.xhrFields) {
+      // TODO: This can be removed.
       options.xhrFields = { withCredentials: true };
     }
 

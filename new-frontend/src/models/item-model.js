@@ -1,4 +1,4 @@
-Item = Backbone.Model.extend({
+let Item = Backbone.Model.extend({
   defaults: function() {
     return {
       title: '',
@@ -10,3 +10,5 @@ Item = Backbone.Model.extend({
     this.save({ completed: !this.get('completed') });
   }
 });
+
+export default Item

@@ -1,10 +1,13 @@
-var SessionModel = Backbone.Model.extend({
+import $ from 'jquery'
+
+let SessionModel = Backbone.Model.extend({
 
   urlRoot: 'http://localhost:3000/api/v1/user_session',
 
   initialize: function () {
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
       options.xhrFields = {
+        //TODO: Remove this
         withCredentials: true
       };
     });
@@ -31,3 +34,5 @@ var SessionModel = Backbone.Model.extend({
     Backbone.history.navigate('login', { trigger: true });
   },
 });
+
+export default SessionModel

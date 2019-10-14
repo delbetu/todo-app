@@ -1,4 +1,9 @@
-var LoginView = Backbone.View.extend({
+import SessionModel from '../models/session-model.js'
+
+// TODO: Shouldn't this to share the same session object ?
+let session = new SessionModel();
+
+let LoginView = Backbone.View.extend({
   template: require("../templates/login.html"),
 
   id: 'main-content',
@@ -17,7 +22,9 @@ var LoginView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template());
+    this.$el.html(this.template);
     return this;
   }
 });
+
+export default LoginView

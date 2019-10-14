@@ -1,5 +1,6 @@
-// var JST = require('jst')
-GroupItemCardView = Backbone.View.extend({
+import GroupItemView from './group-item-view.js'
+
+let GroupItemCardView = Backbone.View.extend({
   template: require("../templates/group-item-card.html" ),
 
   className: 'nav__item',
@@ -26,8 +27,10 @@ GroupItemCardView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(_.template(this.template)(this.model.toJSON()));
 
     return this;
   }
 });
+
+export default GroupItemCardView

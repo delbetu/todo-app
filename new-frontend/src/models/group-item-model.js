@@ -1,4 +1,6 @@
-GroupItem = Backbone.Model.extend({
+import ItemCollection from '../collections/item-collection.js'
+
+let GroupItem = Backbone.Model.extend({
   defaults: function() {
     return {
       list_title: '',
@@ -14,3 +16,5 @@ GroupItem = Backbone.Model.extend({
     return response;
   }
 });
+
+export default GroupItem

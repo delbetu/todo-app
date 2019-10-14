@@ -1,6 +1,8 @@
+import ItemView from './item-view.js'
+
 var ENTER_KEY = 13;
 
-GroupItemView = Backbone.View.extend({
+let GroupItemView = Backbone.View.extend({
   tagName: 'section',
 
   id: 'main-content',
@@ -29,7 +31,7 @@ GroupItemView = Backbone.View.extend({
   },
 
   render: function() {
-    var $template = $(this.template({ title: this.title }));
+    var $template = $(_.template(this.template)({ title: this.title }));
 
     this.collection.each(function(todo) {
       var item = new ItemView({ model: todo });
@@ -41,3 +43,4 @@ GroupItemView = Backbone.View.extend({
   }
 });
 
+export default GroupItemView

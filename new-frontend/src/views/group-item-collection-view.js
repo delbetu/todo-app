@@ -1,6 +1,9 @@
+import $ from 'jquery'
+import GroupItemCardView from './group-item-card-view.js'
+
 var ENTER_KEY = 13;
 
-GroupItemCollectionView = Backbone.View.extend({
+let GroupItemCollectionView = Backbone.View.extend({
   tagName: 'nav',
 
   className: 'nav',
@@ -37,7 +40,7 @@ GroupItemCollectionView = Backbone.View.extend({
   },
 
   render: function() {
-    var $template = $(this.template());
+    var $template = $(this.template);
 
     var that = this;
     this.collection.each(function(groupItem, index) {
@@ -59,3 +62,5 @@ GroupItemCollectionView = Backbone.View.extend({
     return this;
   }
 });
+
+export default GroupItemCollectionView

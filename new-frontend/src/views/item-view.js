@@ -1,4 +1,5 @@
-ItemView = Backbone.View.extend({
+
+let ItemView = Backbone.View.extend({
 
   tagName: 'li',
 
@@ -19,7 +20,9 @@ ItemView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(_.template(this.template)(this.model.toJSON()));
     return this;
   }
 });
+
+export default ItemView

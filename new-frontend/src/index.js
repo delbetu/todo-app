@@ -4,19 +4,61 @@ import Backbone from 'backbone'
 import './stylesheets/menu.css'
 import './stylesheets/style.css'
 
-function component() {
-  const element = document.createElement('div');
-  // element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  let template = require("./templates/item.html")
-  let content2 = _.template(template)({title: 'sldfds', completed: true})
+import SessionModel from './models/session-model.js'
+import LoginView from './views/login.js'
+import GroupItemCollectionView from './views/group-item-collection-view.js'
+import GroupItemCollection from './collections/group-item-collection.js'
 
-  element.innerHTML = content2
+let session;
 
-  return element;
-}
+$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+  if (jqxhr.status === 403) {
+    Backbone.history.navigate('login', { trigger: true });
+  }
+});
 
-document.body.appendChild(component());
+var TodoRouter = Backbone.Router.extend({
+  routes: {
+         "" : "index",
+    "login" : "login"
+  },
+
+  index: function() {
+    debugger
+    if (!session.attributes.auth) {
+      Backbone.history.navigate('login', { trigger: true });
+      return;
+    }
+
+    var menuItems = new GroupItemCollectionView({
+      collection: new GroupItemCollection(),
+      selectedIndex: 0
+    });
+
+    $('nav#left-menu').replaceWith(menuItems.render().el);
+
+    $('#main-content').html('');
+    $('.menu-toogle').show();
+    $('.logout').show();
+    $('#left-menu').show();
+
+    $('.logout button').on('click', function(e) {
+      session.logout();
+    });
+  },
+
+  login: function() {
+    $('.menu-toogle').hide();
+    $('.logout').hide();
+    $('#left-menu').hide();
+
+    let loginView = new LoginView();
+    $('#main-content').replaceWith(loginView.render().el);
+  }
+});
 
 $(document).ready(function() {
+  new TodoRouter
+  session = new SessionModel();
   Backbone.history.start();
 });
