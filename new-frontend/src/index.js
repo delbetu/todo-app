@@ -24,7 +24,6 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    debugger
     if (!session.attributes.auth) {
       Backbone.history.navigate('login', { trigger: true });
       return;
@@ -52,7 +51,7 @@ var TodoRouter = Backbone.Router.extend({
     $('.logout').hide();
     $('#left-menu').hide();
 
-    let loginView = new LoginView();
+    let loginView = new LoginView({ session: session });
     $('#main-content').replaceWith(loginView.render().el);
   }
 });

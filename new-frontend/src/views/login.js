@@ -1,8 +1,5 @@
 import SessionModel from '../models/session-model.js'
 
-// TODO: Shouldn't this to share the same session object ?
-let session = new SessionModel();
-
 let LoginView = Backbone.View.extend({
   template: require("../templates/login.html"),
 
@@ -14,11 +11,15 @@ let LoginView = Backbone.View.extend({
     'click .button-container button': 'login'
   },
 
+  initialize: function(options) {
+    this.options = options
+  },
+
   login: function(e) {
     e.preventDefault();
 
     var credentials = { email: this.$('#email').val(), password: this.$('#password').val() };
-    session.login(credentials);
+    this.options.session.login(credentials);
   },
 
   render: function() {
