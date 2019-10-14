@@ -4,7 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server --open"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,8 @@
     "html-loader": "^0.5.5",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
     "backbone": "^1.4.0",

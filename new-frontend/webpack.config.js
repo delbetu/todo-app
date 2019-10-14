@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: ['./src/index.js',
           './src/models/group-item-model.js',
@@ -15,6 +16,9 @@ module.exports = {
           './src/views/login.js'
     ],
     helpers: './src/helpers/backbone_cors.js'
+  },
+  devServer: {
+    contentBase: './dist',
   },
   output: {
     filename: '[name].bundle.js',
