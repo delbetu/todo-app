@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import GroupItemView from './group-item-view.js'
 
 let GroupItemCardView = Backbone.View.extend({

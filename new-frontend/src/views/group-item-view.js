@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ItemView from './item-view.js'
 
 var ENTER_KEY = 13;
