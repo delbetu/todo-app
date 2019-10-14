@@ -3,6 +3,7 @@ import $ from 'jquery'
 import Backbone from 'backbone'
 import './stylesheets/menu.css'
 import './stylesheets/style.css'
+import 'todomvc-app-css/index.css'
 
 import SessionModel from './models/session-model.js'
 import LoginView from './views/login.js'
