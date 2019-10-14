@@ -4,3 +4,4 @@ new-frontend/node_modules
 **/*.log
 **/*.sqlite3
 **/tmp/
+**/.byebug_history
