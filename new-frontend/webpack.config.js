@@ -15,8 +15,7 @@ module.exports = {
           './src/views/group-item-view.js',
           './src/views/item-view.js',
           './src/views/login.js'
-    ],
-    helpers: './src/helpers/backbone_cors.js'
+    ]
   },
   devServer: {
     contentBase: './dist',
