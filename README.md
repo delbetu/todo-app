@@ -46,12 +46,12 @@ Available users:
 
 ## Functionalities
 
-Use can login and organize their tasks into lists and items.  
-A list of tasks is called GroupItem  
-And a task is called Item  
+User can login and organize their tasks into lists and items.  
+A list of tasks is called `GroupItem`  
+And a task is called `Item`  
 
-A user has many GroupItem and  
-A GroupItem has many Items
+A `User` has many `GroupItem` and  
+A `GroupItem` has many `Items`
 
 ## Endpoints ( Curl examples )
 | Description             | Rails-Endpoint                                         | Backbone call                 |
@@ -66,7 +66,6 @@ A GroupItem has many Items
 | Create group item       | POST    /api/v1/group_items/                           |item-collection.create()       |
 | Update group item       | PUT    /api/v1/group_items/:id                         |group-item-model.save();       |
 | Delete group item       | DELETE /api/v1/group_items/:id                         |group-item-model.destroy();    |
-|-------------------------|--------------------------------------------------------|-------------------------------|
 
 ### API
 Every request must use content type application/json
