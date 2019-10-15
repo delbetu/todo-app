@@ -1,6 +1,6 @@
 # Todo app
 
-Simple frontend-backend application using backbone and rails 4 with grape.
+Single page application with frontend and backend implementation which allows creation of tasks and lists of tasks, along with destroying and mark them as completed.  
 
 ## Pre-requisites
 * Node >= 8.16.1
