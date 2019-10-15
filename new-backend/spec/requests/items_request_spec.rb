@@ -9,7 +9,7 @@ RSpec.describe V1::ItemsController, type: :request do
   }
 
   it 'list items for user' do
-    get "/api/v1/group_items/#{group_item.id}/items"
+    get "/api/v1/group_items/#{group_item.id}/items", 'headers': { 'Authorization' => user.id }
 
     items = JSON.parse(response.body)
     expect(response).to have_http_status(:success)
@@ -17,7 +17,7 @@ RSpec.describe V1::ItemsController, type: :request do
   end
 
   it 'find item by its id' do
-    get "/api/v1/group_items/#{item.id}"
+    get "/api/v1/group_items/#{item.id}", 'headers': { 'Authorization' => user.id }
 
     expect(response).to have_http_status(:success)
 
@@ -27,7 +27,7 @@ RSpec.describe V1::ItemsController, type: :request do
 
   it 'creates an item' do
     post "/api/v1/group_items/#{group_item.id}/items",
-      params: { title: "Go to granny's home" }
+      params: { title: "Go to granny's home" }, 'headers': { 'Authorization' => user.id }
 
     json = JSON.parse(response.body)
     expect(response).to have_http_status(:success)
@@ -38,14 +38,14 @@ RSpec.describe V1::ItemsController, type: :request do
 
   it 'updates an existing item' do
     put "/api/v1/group_items/#{group_item.id}/items/#{item.id}",
-      params: { title: 'new title' }
+      params: { title: 'new title' }, 'headers': { 'Authorization' => user.id }
 
     result = Item.last
     expect(result.title).to eq('new title')
   end
 
   it 'deletes an existing item' do
-    delete "/api/v1/group_items/#{group_item.id}/items/#{item.id}"
+    delete "/api/v1/group_items/#{group_item.id}/items/#{item.id}", 'headers': { 'Authorization' => user.id }
 
     expect(Item.count).to eq(0)
   end

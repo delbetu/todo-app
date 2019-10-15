@@ -1,8 +1,7 @@
 class V1::ItemsController < ApplicationController
   def index
-    user = User.last # TODO: get user from token
     # TODO: improve query
-    items = user.group_items.find(params.require(:group_item_id).to_i).list_items
+    items = current_user.group_items.find(params.require(:group_item_id).to_i).list_items
     render json: items
     # TODO: cover rescue
   end
@@ -16,9 +15,8 @@ class V1::ItemsController < ApplicationController
 
   def create
     # TODO: validate input
-    user = User.last
     title = params.require(:title)
-    item = user.group_items.find(params.require(:group_item_id).to_i)
+    item = current_user.group_items.find(params.require(:group_item_id).to_i)
       .list_items.create!(title: title)
     render json: item, status: 200
     # TODO: manage errors
@@ -26,16 +24,16 @@ class V1::ItemsController < ApplicationController
 
   def update
     title = params.require(:title)
-    user = User.last
-    item = user.group_items.find(params.require(:group_item_id).to_i)
+    completed = params.require(:completed)
+    item = current_user.group_items.find(params.require(:group_item_id).to_i)
       .list_items.find(params.require(:id))
-    item.update!(title: title)
+    item.update!(title: title, completed: completed)
     render json: item, status: 200
   # rescue not found TODO
   end
 
   def destroy
-    User.last.group_items.find(params.require(:group_item_id))
+    current_user.group_items.find(params.require(:group_item_id))
       .list_items.find(params.require(:id)).destroy!
     render json: {message: 'successfully destroy'}, status: 200
   # rescue TODO: manage this case not found

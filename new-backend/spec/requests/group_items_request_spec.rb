@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# TODO: Implement authorization in other place
-# sign_in helper returns a valid token for a given user
 RSpec.describe V1::GroupItemsController, type: :request do
   # Given a user with one group item
   let(:group_item) { GroupItem.create(list_title: 'Things to do')  }
