@@ -4,6 +4,7 @@ import Backbone from 'backbone'
 import './stylesheets/menu.css'
 import './stylesheets/style.css'
 import 'todomvc-app-css/index.css'
+import './favicon.ico'
 
 import SessionModel from './models/session-model.js'
 import LoginView from './views/login.js'
