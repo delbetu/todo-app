@@ -17,7 +17,10 @@ let SessionModel = Backbone.Model.extend({
     var that = this;
     var successCallback =
           function(data) {
-            that.set({ auth: true, id: '' });
+            that.set({ auth: true });
+            $.ajaxSetup({
+              headers: { 'Authorization': data.attributes.token }
+            });
             Backbone.history.navigate('', { trigger: true });
           };
 

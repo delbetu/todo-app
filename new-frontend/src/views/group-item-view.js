@@ -13,6 +13,7 @@ let GroupItemView = Backbone.View.extend({
   template: require("../templates/group-item.html"),
 
   initialize: function(options) {
+    this.collection.fetch()
     this.title = options['title'];
     this.listenTo(this.collection, 'all', this.render);
   },
