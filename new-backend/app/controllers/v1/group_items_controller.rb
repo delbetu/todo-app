@@ -1,10 +1,7 @@
 class V1::GroupItemsController < ApplicationController
-  # TODO: pending
-  # require_authorization :index
 
   def index
-    user = User.last # TODO: get user from token
-    render json: user.group_items
+    render json: current_user.group_items
   end
 
   def show
@@ -16,9 +13,8 @@ class V1::GroupItemsController < ApplicationController
 
   def create
     # TODO: validate input
-    user = User.last
     list_title = params.require(:list_title)
-    group_item = user.group_items.create!(list_title: list_title)
+    group_item = current_user.group_items.create!(list_title: list_title)
     render json: group_item, status: 200
     # TODO: manage errors
   end
@@ -32,7 +28,7 @@ class V1::GroupItemsController < ApplicationController
   end
 
   def destroy
-    User.last.group_items.find(params.require(:id)).destroy
+    current_user.group_items.find(params.require(:id)).destroy
     render json: {message: 'successfully destroy'}, status: 200
   # rescue TODO: manage this case not found
   end

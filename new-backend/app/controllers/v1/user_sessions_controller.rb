@@ -5,8 +5,8 @@ class V1::UserSessionsController < ApplicationController
     email = filtered_params.require(:email)
     password = filtered_params.require(:password)
 
-    token = request.headers['Authorization']
-    decoded_token = decode(token)
+    # token = request.headers['Authorization']
+    decoded_token = decode(request_token)
 
     user = User.find_by(id: decoded_token.user_id)
 
@@ -28,13 +28,5 @@ class V1::UserSessionsController < ApplicationController
     render json: { message: e.message }, status: :bad_request
   rescue => e
     render json: { message: 'Unknown Error' }, status: 500
-  end
-
-  def decode(token)
-    OpenStruct.new(user_id: token)
-  end
-
-  def encode(user_id)
-    user_id
   end
 end
