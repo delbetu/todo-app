@@ -2,23 +2,9 @@
 
 Simple frontend-backend application using backbone and rails 4 with grape.
 
-
 ## Pre-requisites
-Have npm and ruby installed.
-Have rails 4 and grunt-cli installed.
-
-```bash
-sudo npm install -g grunt-cli
-```
-
-## Build frontend
-
-```bash
-cd frontend
-grunt build
-grunt
-```
-Visit http://localhost:8000
+* Node >= 8.16.1
+* Ruby >= 2.5.7
 
 ## Build backend
 
@@ -31,40 +17,121 @@ bundle exec rake db:seed
 rails server
 ```
 
-### API
-Host localhost:3000
-Every route is scoped under /api/v1
-Every request must use content type application/json
+## Build frontend
 
-#### Session
+```bash
+cd frontend
+npm install
+npm run build
+npm start
 ```
-POST    /user_session
-DELETE  /user_session
-```
-Authentication is meant to be from a browser since it is based on cookies.
+
+Visit http://localhost:8080
 
 Available users:
 * admin@todo.com admin
 * user@todo.com user
 
+## Used technologies
+### Frontend
+* Webpack
+* Backbone
+* Underscore
+* Jquery
+
+### Backend
+* Rails 6 api
+* JWT authentication
+* Rspec
+
+## Functionalities
+
+Use can login and organize their tasks into lists and items.  
+A list of tasks is called GroupItem  
+And a task is called Item  
+
+A user has many GroupItem and  
+A GroupItem has many Items
+
+## Endpoints ( Curl examples )
+| Description             | Rails-Endpoint                                         | Backbone call                 |
+|-------------------------|--------------------------------------------------------|-------------------------------|
+| Get auth token          | POST   /api/v1/user_session                            |ajax call                      |
+| Fetch items for a group | GET    /api/v1/group_items/:group_item_id/items        |group-item-collection.fetch(); |
+| Create item for a group | POST   /api/v1/group_items/:group_item_id/items        |group-item-collection.create();|
+| Get item for a group    | GET    /api/v1/group_items/:group_item_id/items/:id    |item-model.fetch();            |
+| Update item for a group | PUT    /api/v1/group_items/:group_item_id/items/:id    |item-model.save();             |
+| Delete item             | DELETE /api/v1/group_items/:group_item_id/items/:id    |item-model.destroy();          |
+| Get group item          | GET    /api/v1/group_items                             |item-collection.fetch();       |
+| Create group item       | POST    /api/v1/group_items/                           |item-collection.create()       |
+| Update group item       | PUT    /api/v1/group_items/:id                         |group-item-model.save();       |
+| Delete group item       | DELETE /api/v1/group_items/:id                         |group-item-model.destroy();    |
+|-------------------------|--------------------------------------------------------|-------------------------------|
+
+### API
+Every request must use content type application/json
+
+#### Authorization
+Get token for existing user from email and password.
+
+```
+curl -i -X POST \
+     -H "Content-Type:application/x-www-form-urlencoded" \
+     -d "user_session[email]=admin@todo.com" \
+     -d "user_session[password]=admin" \
+     'http://localhost:3000/api/v1/user_session'
+```
+
 #### GroupItem
 Attributes list_title, list_items
+
 ```
-GET    /group_items
-GET    /group_items/:id
-POST   /group_items
-PUT    /group_items/:id
-DELETE /group_items/:id
+curl -i -X GET \
+ 'http://localhost:3000/api/v1/group_items'
+
+curl -i -X GET \
+ 'http://localhost:3000/api/v1/group_items/1'
+
+curl -i -X POST \
+   -H "Content-Type:application/json" \
+   -d '{ "list_title" : "Job tasks" }' \
+   'http://localhost:3000/api/v1/group_items'
+
+curl -i -X PUT \
+   -H "Content-Type:application/json" \
+   -d '{ "list_title" : "Job Tasks"  }' \
+   'http://localhost:3000/api/v1/group_items/1'
+
+curl -i -X DELETE \
+   -H "Content-Type:application/json" \
+   'http://localhost:3000/api/v1/group_items/1'
 ```
 
 #### Items
 Attributes title, completed
+
 ```
-GET    /group_item/:group_id/items
-GET    /group_item/:group_id/:id
-POST   /group_item/:group_id/
+curl -i -X GET \
+ 'http://localhost:3000/api/v1/group_items/3/items'
+
+curl -i -X GET \
+ 'http://localhost:3000/api/v1/group_items/3/items/6'
+
+curl -i -X POST \
+   -H "Content-Type:application/json" \
+   -d '{ "title": "Write integration tests"  }' \
+   'http://localhost:3000/api/v1/group_items/3/items'
+
 PUT    /group_item/:group_id/:id
-DELETE /group_item/:group_id/:id
+
+curl -i -X PUT \
+   -H "Content-Type:application/json" \
+   -d '{ "title": "Write unit tests"  }' \
+   'http://localhost:3000/api/v1/group_items/3/items'
+
+curl -i -X DELETE \
+   -H "Content-Type:application/json" \
+   'http://localhost:3000/api/v1/group_items/3/items/6'
 ```
 
 ## Pending tasks
