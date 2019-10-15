@@ -56,6 +56,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.1, >= 2.1.8)
+    awesome_print (1.8.0)
     bcrypt (3.1.13)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
@@ -170,6 +171,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
