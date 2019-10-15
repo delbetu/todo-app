@@ -1,10 +1,13 @@
-var SessionModel = Backbone.Model.extend({
+import $ from 'jquery'
+
+let SessionModel = Backbone.Model.extend({
 
   urlRoot: 'http://localhost:3000/api/v1/user_session',
 
   initialize: function () {
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
       options.xhrFields = {
+        //TODO: Remove this
         withCredentials: true
       };
     });
@@ -14,7 +17,11 @@ var SessionModel = Backbone.Model.extend({
     var that = this;
     var successCallback =
           function(data) {
-            that.set({ auth: true, id: '' });
+            that.set({ auth: true });
+            $.ajaxSetup({
+              // headers: { 'Authorization': 'Bearer '+data.attributes.token }
+              headers: { 'Authorization': data.attributes.token }
+            });
             Backbone.history.navigate('', { trigger: true });
           };
 
@@ -31,3 +38,5 @@ var SessionModel = Backbone.Model.extend({
     Backbone.history.navigate('login', { trigger: true });
   },
 });
+
+export default SessionModel

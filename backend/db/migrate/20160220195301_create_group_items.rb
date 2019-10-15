@@ -1,4 +1,4 @@
-class CreateGroupItems < ActiveRecord::Migration
+class CreateGroupItems < ActiveRecord::Migration[6.0]
   def change
     create_table :group_items do |t|
       t.string :list_title

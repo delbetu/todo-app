@@ -1,11 +1,4 @@
-class Item < ActiveRecord::Base
+class Item < ApplicationRecord
+  # expose :id, :title, :completed
   belongs_to :group_item
-
-  def entity
-    Entity.new(self)
-  end
-
-  class Entity < Grape::Entity
-    expose :id, :title, :completed
-  end
 end
