@@ -1,9 +1,17 @@
 class V1::ItemsController < ApplicationController
+
   def index
-    # TODO: improve query
-    items = current_user.group_items.find(params.require(:group_item_id).to_i).list_items
-    render json: items
-    # TODO: cover rescue
+    result = ListItems.call(ListItems::Params.with(
+      group_id: params.require(:group_item_id),
+      user_id: current_user.id,
+      data_provider: Item
+    ))
+    render json: result.items, status: 200
+  rescue ArgumentError => e
+    render json: { errors: 'Invalid parameters'}, status: :bad_request # 400
+  rescue => e
+    Rails.logger.error("Error calling ItemsController#index: #{e.message}")
+    render json: { errors: [ 'Unknown error' ] }, status: 500
   end
 
   def show
