@@ -38,7 +38,7 @@ RSpec.describe V1::ItemsController, type: :request do
 
   it 'updates an existing item' do
     put "/api/v1/group_items/#{group_item.id}/items/#{item.id}",
-      params: { title: 'new title' }, 'headers': { 'Authorization' => user.id }
+      params: { title: 'new title', completed: false }, 'headers': { 'Authorization' => user.id }
 
     result = Item.last
     expect(result.title).to eq('new title')
