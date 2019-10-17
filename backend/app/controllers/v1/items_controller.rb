@@ -15,10 +15,11 @@ class V1::ItemsController < ApplicationController
   end
 
   def show
-    item = Item.find(params.require(:id))
-    render json: item
-  # rescue ActiveRecord::NotFound # TODO: test this case
-  #   render json: {  }, status: 404
+    id = Integer(params.require(:id))
+    render json: GetItem.call(id: id, data_provider: Item)
+  rescue => e
+    Rails.logger.error("Error calling ItemsController#show: #{e.message}")
+    render json: { errors: [ 'Unknown error' ] }, status: 500
   end
 
   def create
