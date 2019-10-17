@@ -1,12 +1,12 @@
 class V1::ItemsController < ApplicationController
 
   def index
-    result = ListItems.call(ListItems::Params.with(
-      group_id: params.require(:group_item_id),
+    result = ListItems.call(
+      group_id: Integer(params.require(:group_item_id)),
       user_id: current_user.id,
       data_provider: Item
-    ))
-    render json: result.items, status: 200
+    )
+    render json: result, status: 200
   rescue ArgumentError => e
     render json: { errors: 'Invalid parameters'}, status: :bad_request # 400
   rescue => e

@@ -1,17 +1,13 @@
+require 'contracts'
+
 class ListItems
-  class Params < Value.new(:group_id, :user_id, :data_provider)
-    def validate!
-      Integer(group_id) # must be numeric
-      Integer(user_id) # must be numeric
-      raise ArgumentError unless data_provider.respond_to?(:for) # collaborator must respond to :for
-    end
-  end
+  C = Contracts
+  include C::Core
 
-  Result = Value.new(:items)
+  Item = Struct.new(:id, :title, :completed)
 
-  def self.call(params)
-    params.validate!
-    items = params.data_provider.for(params.group_id, params.user_id)
-    Result.with(items: items)
+  Contract(C::KeywordArgs[ group_id: C::Num, user_id: C::Num, data_provider: C::Any ] => C::ArrayOf[Item])
+  def self.call(group_id:, user_id:, data_provider:)
+    data_provider.for(group_id, user_id).map { |r| Item.new(r.id, r.title, r.completed) }
   end
 end
