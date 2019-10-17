@@ -1,0 +1,7 @@
+*.un~
+node_modules
+**/*.log
+**/*.sqlite3
+**/tmp/
+**/dist/*.bundle.js
+dist/*.bundle.js.map

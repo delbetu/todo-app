@@ -1,8 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
   entry: {
     app: ['./src/index.js',
           './src/models/group-item-model.js',
@@ -16,9 +14,6 @@ module.exports = {
           './src/views/item-view.js',
           './src/views/login.js'
     ]
-  },
-  devServer: {
-    contentBase: './dist',
   },
   output: {
     filename: '[name].bundle.js',
