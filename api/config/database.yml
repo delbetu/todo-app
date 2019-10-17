@@ -22,4 +22,8 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
+  adapter: postgresql
+  database: todo_app_db_production
+  username: api-user
+  password: <%= ENV['API_DATABASE_PASSWORD'] %>
