@@ -1,0 +1,6 @@
+*.un~
+**/*.log
+**/*.sqlite3
+**/tmp/
+**/.byebug_history
+**/dist/*.bundle.js

@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2016_02_22_025426) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "group_items", force: :cascade do |t|
     t.string "list_title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_group_items_on_user_id"
   end
 
@@ -25,7 +28,7 @@ ActiveRecord::Schema.define(version: 2016_02_22_025426) do
     t.boolean "completed", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "group_item_id"
+    t.bigint "group_item_id"
     t.index ["group_item_id"], name: "index_items_on_group_item_id"
   end
 
