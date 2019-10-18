@@ -17,7 +17,7 @@ RSpec.describe V1::ItemsController, type: :request do
   end
 
   it 'find item by its id' do
-    get "/api/v1/group_items/#{item.id}", 'headers': { 'Authorization' => user.id }
+    get "/api/v1/group_items/#{group_item.id}/items/#{item.id}", 'headers': { 'Authorization' => user.id }
 
     expect(response).to have_http_status(:success)
 

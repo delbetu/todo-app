@@ -12,7 +12,7 @@ RSpec.describe Item, :type => :model do
     it 'returns items for a given group and user' do
       user, group_item, _ = user_with_group_and_items
 
-      result = Item.for(user.id, group_item.id)
+      result = Item.for(user_id: user.id, group_id: group_item.id)
 
       expect(result).to respond_to(:to_a)
       expect_to_be_an_item(result.first)
@@ -23,7 +23,7 @@ RSpec.describe Item, :type => :model do
         user, group_item, _ = user_with_group_and_items
 
         wrong_group_id = group_item.id + 1
-        result = Item.for(user.id, wrong_group_id)
+        result = Item.for(user_id: user.id, group_id: wrong_group_id)
 
         expect(result).to be_empty
       end
