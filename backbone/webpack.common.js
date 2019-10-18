@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -18,6 +19,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -26,7 +28,13 @@ module.exports = {
       {
         test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
         loader: 'file-loader?name=[name].[ext]'
-      }
+      },
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    })
+  ]
 };

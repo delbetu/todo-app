@@ -2,7 +2,7 @@ import $ from 'jquery'
 
 let SessionModel = Backbone.Model.extend({
 
-  urlRoot: 'http://localhost:3000/api/v1/user_session',
+  urlRoot: process.env.apiHost+'/api/v1/user_session',
 
   initialize: function () {
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
