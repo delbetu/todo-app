@@ -25,25 +25,5 @@ RSpec.describe V1::AuthTokenController, type: :request do
       expect(result['token']).to be_present
     end
 
-    context 'when resending authorization header' do
-      # TODO: It should reset the expiration date
-      it 'returns 200 already logged in' do
-        user = User.create(email: 'user@test.com', password: 'test')
-        credentials = { credentials: { email: 'user@test.com', password: 'test' } }
-
-        post '/api/v1/auth_token', params: credentials,
-        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
-
-        result = JSON.parse(response.body)
-
-        post '/api/v1/auth_token', params: credentials,
-        headers: { 'Content-Type' => 'application/x-www-form-urlencoded', 'Authorization' => result['token'] }
-
-        expect(response).to have_http_status(:success)
-        result = JSON.parse(response.body)
-        expect(result['notice']).to match(/already/)
-      end
-    end
-
   end
 end

@@ -21,20 +21,10 @@ class ApplicationController < ActionController::API
   end
 
   def authorized_user_for(controller:, action:)
-    user_id = decode(request_token).user_id
+    user_id = Auth::TokenManager.decode(request_token).user_id
     user = User.find(user_id) # raise error if not found
     Authorizer.new(controller: controller, action: action, user_roles: ['user']).authorize!
     user
-  end
-
-  # from token to permission object
-  def decode(token)
-    OpenStruct.new(user_id: token.to_i)
-  end
-
-  # from user_id to token
-  def encode(user_id)
-    user_id
   end
 
   def request_token
