@@ -1,11 +1,16 @@
-class V1::UserSessionsController < ApplicationController
+class V1::AuthTokenController < ApplicationController
   # TODO: Refactor
   def create
-    filtered_params = params.require(:user_session).permit(:email, :password)
+    # FIXME: user_session is deprecated must be removed after all clients stop using it.
+    params_key = if params[:credentials].present?
+                   params.require(:credentials)
+                 else
+                   params.require(:user_session)
+                 end
+    filtered_params = params_key.permit(:email, :password)
     email = filtered_params.require(:email)
     password = filtered_params.require(:password)
 
-    # token = request.headers['Authorization']
     decoded_token = decode(request_token)
 
     user = User.find_by(id: decoded_token.user_id)

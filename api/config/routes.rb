@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   scope :api do
     namespace :v1 do
-      resource :user_session, only: [:create]
+      resources :auth_token, only: [:create]
+      post :user_session, to: 'auth_token#create' # TODO: temporally support legacy url
 
       resources :group_items do
         resources :items

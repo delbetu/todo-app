@@ -4,4 +4,4 @@ require 'contracts'
 require 'byebug'
 
 
-Dir['./app/core/*'].each { |f| require f }
+Dir['./app/core/**/*.rb'].each { |file| require file }

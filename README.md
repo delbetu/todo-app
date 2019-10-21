@@ -56,7 +56,7 @@ A `GroupItem` has many `Items`
 ## Endpoints ( Curl examples )
 | Description             | Rails-Endpoint                                         | Backbone call                 |
 |-------------------------|--------------------------------------------------------|-------------------------------|
-| Get auth token          | POST   /api/v1/user_session                            |ajax call                      |
+| Get auth token          | POST   /api/v1/auth_token                              |ajax call                      |
 | Fetch items for a group | GET    /api/v1/group_items/:group_item_id/items        |group-item-collection.fetch(); |
 | Create item for a group | POST   /api/v1/group_items/:group_item_id/items        |group-item-collection.create();|
 | Get item for a group    | GET    /api/v1/group_items/:group_item_id/items/:id    |item-model.fetch();            |
@@ -76,9 +76,9 @@ Get token for existing user from email and password.
 ```
 curl -i -X POST \
      -H "Content-Type:application/x-www-form-urlencoded" \
-     -d "user_session[email]=admin@todo.com" \
-     -d "user_session[password]=admin" \
-     'http://localhost:3000/api/v1/user_session'
+     -d "credentials[email]=admin@todo.com" \
+     -d "credentials[password]=admin" \
+     'http://localhost:3000/api/v1/auth_token'
 ```
 
 #### GroupItem
