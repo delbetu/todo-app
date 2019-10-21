@@ -3,9 +3,9 @@ module Auth
   class Authorizer
     Unauthorized = Class.new(StandardError)
 
-    # Given a user role returns a regular expression matiching which resources can access.
     def permission_assignment
       {
+        'anonymous' => /AuthTokenController#create/,
         'user' => /.*#.*/ # logged in user has access to every controller action.
       }
     end
