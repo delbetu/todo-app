@@ -1,3 +1,5 @@
+require_relative 'dto'
+
 class GetItem
   C = Contracts
   include C::Core

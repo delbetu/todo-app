@@ -1,3 +1,4 @@
+# Data transfer objects
 module Dto
   Item = Struct.new(:id, :title, :completed)
   class NullItem < Item

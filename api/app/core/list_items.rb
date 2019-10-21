@@ -1,3 +1,5 @@
+require_relative 'dto'
+
 class ListItems
   C = Contracts
   include C::Core
