@@ -5,7 +5,7 @@ class CreateItem
 
   Contract(C::KeywordArgs[group_id: C::Num, title: String, user: C::RespondTo[:has_group?],
                           data_provider: C::RespondTo[:create] ] => ::Dto::Item)
-  def self.call(group_id: group_id, title: title, user: user, data_provider: )
+  def self.call(group_id:, title:, user:, data_provider: )
     check_that_group_id_belongs_to_current_user(user, group_id)
     create_item(group_id, title, data_provider)
   end

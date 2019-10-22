@@ -61,9 +61,15 @@ class V1::ItemsController < ApplicationController
   end
 
   def destroy
-    current_user.group_items.find(params.require(:group_item_id))
-      .list_items.find(params.require(:id)).destroy!
-    render json: {message: 'successfully destroy'}, status: 200
-    # rescue TODO: manage this case not found
+    item_id = Integer(params.require(:id))
+    group_id = Integer(params.require(:group_item_id))
+
+    success = DestroyItem.call(id: item_id, group_id: group_id, user: current_user, data_provider: Item)
+
+    if success
+      render json: {message: 'successfully destroy'}, status: 200
+    else
+      render json: { errors: ['Item not found'] }, status: 404
+    end
   end
 end
