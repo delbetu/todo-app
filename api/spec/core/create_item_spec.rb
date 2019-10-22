@@ -22,7 +22,7 @@ describe CreateItem do
 
       expect {
         CreateItem.call(group_id: 1, title: 'demo', user: fake_user, data_provider: fake_item_table)
-      }.to raise_error(CreateItem::DataIntegrityViolation)
+      }.to raise_error(Validation::DataIntegrityViolation)
     end
   end
 end

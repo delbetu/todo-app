@@ -32,7 +32,7 @@ describe DestroyItem do
 
       expect {
         DestroyItem.call(id: 1, group_id: 1, user: fake_user, data_provider: fake_item_table)
-      }.to raise_error(DestroyItem::DataIntegrityViolation)
+      }.to raise_error(Validation::DataIntegrityViolation)
     end
   end
 end

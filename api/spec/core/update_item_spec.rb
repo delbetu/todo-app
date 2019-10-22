@@ -32,7 +32,7 @@ describe UpdateItem do
                         completed: true,
                         user: fake_user,
                         data_provider: fake_item_table)
-      }.to raise_error(UpdateItem::DataIntegrityViolation)
+      }.to raise_error(Validation::DataIntegrityViolation)
     end
   end
 end
