@@ -7,5 +7,12 @@ module Dto
     def completed; end
     def nil?; true; end
   end
+
+
+  ############################## DTO FACTORIES ##############################
+  def self.Item(object)
+    return Dto::NullItem.new if object.nil?
+    Dto::Item.new(object.id, object.title, object.completed)
+  end
 end
 

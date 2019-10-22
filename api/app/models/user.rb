@@ -15,4 +15,8 @@ class User < ApplicationRecord
     @password = Password.create(new_password)
     self.password_hash = @password
   end
+
+  def has_group?(group_item_id)
+    group_items.pluck(:id).include?(group_item_id)
+  end
 end

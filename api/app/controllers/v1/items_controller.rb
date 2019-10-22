@@ -23,12 +23,15 @@ class V1::ItemsController < ApplicationController
   end
 
   def create
-    # TODO: validate input
     title = params.require(:title)
-    item = current_user.group_items.find(params.require(:group_item_id).to_i)
-      .list_items.create!(title: title)
-    render json: item, status: 200
-    # TODO: manage errors
+    group_id = params.require(:group_item_id).to_i
+
+    new_item = CreateItem.call(group_id: group_id, title: title, user: current_user, data_provider: Item)
+
+    render json: new_item, status: 200
+  rescue CreateItem::DataIntegrityViolation => e
+    Rails.logger.info("Suspicious activity: User #{user.id} tried to create items in other's group_items")
+    render json: { errors: [ e.message ] }, status: 403#forbidden
   end
 
   def update
