@@ -34,20 +34,36 @@ class V1::ItemsController < ApplicationController
     render json: { errors: [ e.message ] }, status: 403#forbidden
   end
 
+
+  # FIXME: this enforces to send all attributes no matter if client needs to change only one.
   def update
     title = params.require(:title)
-    completed = params.require(:completed)
-    item = current_user.group_items.find(params.require(:group_item_id).to_i)
-      .list_items.find(params.require(:id))
-    item.update!(title: title, completed: completed)
-    render json: item, status: 200
-  # rescue not found TODO
+    completed = params.require(:completed).downcase == 'true'
+    group_item_id = params.require(:group_item_id).to_i
+    item_id = params.require(:id).to_i
+
+    updated = UpdateItem.call(user: current_user,
+                    group_id: group_item_id,
+                    item_id: item_id,
+                    title: title,
+                    completed: completed,
+                    data_provider: Item)
+
+    if updated
+      render json: { message: 'Item updated successfully' }, status: 200
+    else
+      render json: { errors: ['Item not found'] }, status: 404
+    end
+
+  rescue UpdateItem::DataIntegrityViolation => e
+    Rails.logger.info("Suspicious activity: User #{user.id} tried to update items in other's group_items")
+    render json: { errors: [ e.message ] }, status: 403#forbidden
   end
 
   def destroy
     current_user.group_items.find(params.require(:group_item_id))
       .list_items.find(params.require(:id)).destroy!
     render json: {message: 'successfully destroy'}, status: 200
-  # rescue TODO: manage this case not found
+    # rescue TODO: manage this case not found
   end
 end
