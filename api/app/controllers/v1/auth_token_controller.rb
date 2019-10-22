@@ -1,5 +1,4 @@
 class V1::AuthTokenController < ApplicationController
-  # TODO: Refactor
   def create
     # FIXME: user_session is deprecated must be removed after all clients stop using it.
     params_key = if params[:credentials].present?
@@ -11,12 +10,14 @@ class V1::AuthTokenController < ApplicationController
     email = filtered_params.require(:email)
     password = filtered_params.require(:password)
 
-    user = User.authenticate(email, password)
+    result = Auth::Authenticator.authenticate(email, password, data_provider: User)
 
-    if user
-      payload, status = { notice: 'User logged in', token: Auth::TokenManager.encode(user.id) }, 200
+    if result.authenticated
+      payload = { notice: 'User logged in', token: Auth::TokenManager.encode(result.user.id) }
+      status = 200
     else
-      payload, status = { message: '403 Forbidden access' }, 403
+      payload = { message: '403 Forbidden access' }
+      status = 403
     end
 
     render json: payload, status: status

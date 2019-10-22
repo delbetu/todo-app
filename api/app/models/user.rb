@@ -7,15 +7,6 @@ class User < ApplicationRecord
 
   has_many :group_items, dependent: :destroy
 
-  def self.authenticate(email, password)
-    user = find_by_email(email)
-    if user && user.password == password
-      user
-    else
-      nil
-    end
-  end
-
   def password
     @password ||= Password.new(password_hash)
   end
