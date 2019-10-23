@@ -6,8 +6,8 @@ class V1::GroupItemsController < ApplicationController
   end
 
   def show
-    gi = GroupItem.find(params[:id])
-    render json: gi
+    id = Integer(params.require(:id))
+    render json: GetGroup.call(id: id, data_provider: GroupItem)
   # rescue ActiveRecord::NotFound # TODO: test this case
   #   render json: {  }, status: 404
   end
