@@ -1,7 +1,8 @@
 class V1::GroupItemsController < ApplicationController
 
   def index
-    render json: current_user.group_items
+    result = ListGroups.call(user_id: current_user.id, data_provider: GroupItem)
+    render json: result
   end
 
   def show
