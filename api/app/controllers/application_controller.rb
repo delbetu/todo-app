@@ -21,4 +21,6 @@ class ApplicationController < ActionController::API
   def current_user
     authorized_user_for(controller: controller_name, action: action_name)
   end
+
+  alias_method :authorize_user, :current_user
 end
