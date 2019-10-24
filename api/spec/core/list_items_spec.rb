@@ -11,20 +11,21 @@ describe ListItems do
 
   it 'returns items data'do
     some_data = []
-    result = call(1,1, double(for: some_data))
+    fake_data_provider = double(list: some_data)
+    result = call(1, 2, fake_data_provider)
 
     expect(result).to eq(some_data)
+    filters = { group_item_id: 1, group_items: { user_id: 2 } }
+    expect(fake_data_provider).to have_received(:list).with(filters: filters)
   end
 
-  it 'raise argument error when group_id is not convertible to integer' do
-    expect {
-      call('a', 1, double(for: [1, 2]))
-    }.to raise_error(ArgumentError).with_message(/"a"/)
-  end
+  it 'returns items data'do
+    fake_data_provider = double(list: [])
+    ListError = Class.new(StandardError)
+    allow(fake_data_provider).to receive(:list).and_raise(ListError)
 
-  it 'raise argument error when user_id is not convertible to integer' do
     expect {
-      call(1, 'x', double(for: [1, 2]))
-    }.to raise_error(ArgumentError).with_message(/"x"/)
+      call(1,1, fake_data_provider)
+    }.to raise_error(ListError)
   end
 end

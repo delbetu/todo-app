@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe V1::GroupItemsController, type: :request do
   # Given a user with one group item
-  let(:group_item) { GroupItem.create(list_title: 'Things to do')  }
   let(:user) { User.create(email: 'user@todo.com', password: 'user')  }
+  let(:group_item) { GroupItem.find(GroupItem.create(user: user, list_title: 'Things to do')) }
 
   before do
-    user.group_items = [ group_item  ]
+    user.group_items = [ group_item ]
     user.save
   end
 

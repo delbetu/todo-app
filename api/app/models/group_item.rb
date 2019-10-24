@@ -4,23 +4,48 @@ class GroupItem < ApplicationRecord
   has_many :list_items, dependent: :destroy, class_name: "Item"
   belongs_to :user
 
-  def self.for(user_id:)
-    where(user_id: user_id)
+  extend DataProviderPort
+
+  def self.list(options)
+    where(options[:filters]).map { |r| Dto::Group.new(r.id, r.list_title) }
+  rescue ActiveRecord::StatementInvalid => e
+    raise DataProviderPort::InvalidOptions, e.message
   end
 
-  # returns true/false
-  def self.update(id:, list_title:)
-    item = find_by(id: id)
-    return false unless item
-    item.list_title = list_title if list_title.present?
-    item.save
+  # This overrides active record create which is used for factories in spec.
+  def self.create(resource_values)
+    new_group = new(resource_values)
+    new_group.save!
+    new_group.id
+  rescue ActiveRecord::RecordInvalid => e
+    raise DataProviderPort::ResourceSavingError, e.message
   end
 
-  # returns true when success
-  def self.destroy(id:)
-    item = find_by(id: id)
-    return false unless item
-    item.destroy
-    item.destroyed?
+  def self.update(id, attributes_hash)
+    group = find(id)
+    attributes_hash.each do |attr_name, attr_value|
+      group.send("#{attr_name}=", attr_value) unless attr_value.nil?
+    end
+    group.save!
+    nil
+  rescue ActiveRecord::RecordNotFound => e
+    raise DataProviderPort::ResourceNotFound, e.message
+  rescue ActiveRecord::RecordInvalid => e
+    raise DataProviderPort::ResourceSavingError, e.message
+  end
+
+  def self.get(id)
+    group = find(id)
+    ::Dto::Group.new(group.id, group.list_title)
+  rescue ActiveRecord::RecordNotFound => e
+    raise DataProviderPort::ResourceNotFound, e.message
+  end
+
+  def self.destroy(id)
+    group = find(id)
+    group.destroy
+    nil
+  rescue ActiveRecord::RecordNotFound => e
+    raise DataProviderPort::ResourceNotFound, e.message
   end
 end

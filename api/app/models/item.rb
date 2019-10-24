@@ -1,25 +1,49 @@
 class Item < ApplicationRecord
   # expose :id, :title, :completed
   belongs_to :group_item
+  extend DataProviderPort
 
-  def self.for(user_id:, group_id: )
-    joins(:group_item).where(group_item_id: group_id, group_items: { user_id: user_id })
+  def self.list(options)
+    # options[:filters] => { group_item_id: 1, group_items: { user_id: 4 } }
+    joins(:group_item).where(options[:filters])
+      .map { |r| Dto::Item.new(r.id, r.title, r.completed) }
+  rescue ActiveRecord::StatementInvalid => e
+    raise DataProviderPort::InvalidOptions, e.message
   end
 
-  # returns true/false
-  def self.update(id:, title:, completed:)
-    item = find_by(id: id)
-    return false unless item
-    item.title = title if title.present?
-    item.completed = completed if completed.present?
-    item.save
+  def self.create(resource_values)
+    new_item = new(resource_values)
+    new_item.save!
+    new_item.id
+  rescue ActiveRecord::RecordInvalid => e
+    raise DataProviderPort::ResourceSavingError, e.message
   end
 
-  # returns true when success
-  def self.destroy(id:)
-    item = find_by(id: id)
-    return false unless item
+  def self.update(id, attributes_hash)
+    item = find(id)
+    attributes_hash.each do |attr_name, attr_value|
+      item.send("#{attr_name}=", attr_value) unless attr_value.nil?
+    end
+    item.save!
+    nil
+  rescue ActiveRecord::RecordNotFound => e
+    raise DataProviderPort::ResourceNotFound, e.message
+  rescue ActiveRecord::RecordInvalid => e
+    raise DataProviderPort::ResourceSavingError, e.message
+  end
+
+  def self.get(id)
+    item = find(id)
+    ::Dto::Item.new(item.id, item.title, item.completed)
+  rescue ActiveRecord::RecordNotFound => e
+    raise DataProviderPort::ResourceNotFound, e.message
+  end
+
+  def self.destroy(id)
+    item = find(id)
     item.destroy
-    item.destroyed?
+    nil
+  rescue ActiveRecord::RecordNotFound => e
+    raise DataProviderPort::ResourceNotFound, e.message
   end
 end
