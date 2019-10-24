@@ -2,7 +2,7 @@ import $ from 'jquery'
 
 let SessionModel = Backbone.Model.extend({
 
-  urlRoot: process.env.apiHost+'/api/v1/user_session',
+  urlRoot: process.env.apiHost+'/api/v1/auth_token',
 
   initialize: function () {
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
@@ -25,7 +25,7 @@ let SessionModel = Backbone.Model.extend({
             Backbone.history.navigate('', { trigger: true });
           };
 
-    this.save(credentials, { success: successCallback });
+    this.save({ credentials: credentials }, { success: successCallback });
   },
 
   logout: function() {
