@@ -7,7 +7,6 @@ module DataProviderPort
   ResourceNotFound = Class.new(StandardError)
   ResourceSavingError = Class.new(StandardError)
   InvalidOptions = Class.new(StandardError) # FIXME: Should this have a better name?
-  UniqueKeyViolation = Class.new(StandardError)
 
   # retrives objects matching given filters
   Contract({filters: Hash} => Array)

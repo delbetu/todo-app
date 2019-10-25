@@ -3,8 +3,7 @@ require 'core_helper'
 describe SignupUser do
   let(:dp_succeed) do
     Class.new do
-
-      include DataProviderPort
+      extend DataProviderPort
 
       def self.create(attributes)
         @@args = attributes
@@ -22,7 +21,7 @@ describe SignupUser do
       include DataProviderPort
 
       def self.create(attributes)
-        raise DataProviderPort::UniqueKeyViolation, 'email already taken'
+        raise DataProviderPort::ResourceSavingError, 'email already taken'
       end
     end
   end
@@ -41,7 +40,7 @@ describe SignupUser do
 
     expect {
       id = SignupUser.call(user_data.merge(data_provider: dp_failing_with_repeated_email))
-    }.to raise_error(DataProviderPort::UniqueKeyViolation, 'email already taken')
+    }.to raise_error(DataProviderPort::ResourceSavingError, 'email already taken')
   end
 
   it 'raises weak password error when the password do not pass the strong password policy' do
