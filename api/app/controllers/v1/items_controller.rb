@@ -42,7 +42,7 @@ class V1::ItemsController < ApplicationController
   # FIXME: this enforces to send all attributes no matter if client needs to change only one.
   def update
     title = params.require(:title)
-    completed = params.require(:completed)
+    completed = params.require(:completed).to_s == 'true'
     group_item_id = params.require(:group_item_id).to_i
     item_id = params.require(:id).to_i
 
