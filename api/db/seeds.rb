@@ -1,4 +1,4 @@
-u1 = User.create!(email: 'admin@todo.com', password: 'admin')
+u1 = User.create!(name: 'Admin', email: 'admin@todo.com', password: 'admin')
 
 g1 = u1.group_items.create!(list_title: "Work tasks")
 g1.list_items.create!(title: "Pay bills",           completed: false)
@@ -10,7 +10,7 @@ g2.list_items.create!(title: "Go to granny's home", completed: true)
 g2.list_items.create!(title: "Cook a pie",          completed: false)
 
 
-u2 = User.create!(email: 'user@todo.com', password: 'user')
+u2 = User.create!(name: 'Bruce', email: 'user@todo.com', password: 'user')
 
 g1 = u2.group_items.create!(list_title: "Development tasks")
 g1.list_items.create!(title: "Ask story clarification",            completed: true)
