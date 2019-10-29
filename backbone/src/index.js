@@ -10,6 +10,16 @@ import SessionModel from './models/session-model.js'
 import LoginView from './views/login.js'
 import GroupItemCollectionView from './views/group-item-collection-view.js'
 import GroupItemCollection from './collections/group-item-collection.js'
+import UserCollection from './collections/user-collection.js'
+import User from './models/user-model.js'
+
+// let usersCollection = new UserCollection()
+// let newUser = new User({ user: {
+//     name: 'Bruce',
+//     email: "other"+Math.random()+"@todo.com",
+//     password: 'Pass12345'
+//   }})
+// usersCollection.create(newUser)
 
 let session;
 
