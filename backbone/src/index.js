@@ -10,16 +10,8 @@ import SessionModel from './models/session-model.js'
 import LoginView from './views/login.js'
 import GroupItemCollectionView from './views/group-item-collection-view.js'
 import GroupItemCollection from './collections/group-item-collection.js'
+import SignupView from './views/signup.js'
 import UserCollection from './collections/user-collection.js'
-import User from './models/user-model.js'
-
-// let usersCollection = new UserCollection()
-// let newUser = new User({ user: {
-//     name: 'Bruce',
-//     email: "other"+Math.random()+"@todo.com",
-//     password: 'Pass12345'
-//   }})
-// usersCollection.create(newUser)
 
 let session;
 
@@ -32,7 +24,8 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
 var TodoRouter = Backbone.Router.extend({
   routes: {
          "" : "index",
-    "login" : "login"
+    "login" : "login",
+    "signup" : "signup"
   },
 
   index: function() {
@@ -59,17 +52,39 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   login: function() {
+    $('.menu-toogle').hide()
+    $('.logout').hide()
+    $('#left-menu').hide()
+
+    let loginView = new LoginView({ session: session })
+    $('#main-content').replaceWith(loginView.render().el)
+    $('#success-message').hide();
+  },
+
+  signup: function() {
     $('.menu-toogle').hide();
     $('.logout').hide();
     $('#left-menu').hide();
 
-    let loginView = new LoginView({ session: session });
-    $('#main-content').replaceWith(loginView.render().el);
+    let userCollection = new UserCollection()
+    let signupView = new SignupView({
+      collection: userCollection,
+      onCreationSuccess: function(args) {
+        Backbone.history.navigate('login', { trigger: true })
+        $('#success-message').text(
+          'Account Successfully Created. Please login.'
+        )
+        $('#success-message').show()
+      }
+    })
+
+    $('#main-content').replaceWith(signupView.render().el)
+    $('#error-message').hide()
   }
 });
 
 $(document).ready(function() {
   new TodoRouter
-  session = new SessionModel();
-  Backbone.history.start();
+  session = new SessionModel()
+  Backbone.history.start()
 });

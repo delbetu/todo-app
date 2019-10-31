@@ -342,7 +342,7 @@ body header .logout button {
   transition: .3s ease;
 }
 .card .footer-login a:hover {
-  color: #bababa;
+  color: rgba(175, 47, 47, 0.7);
 }
 .card.alt {
   position: absolute;
@@ -456,4 +456,24 @@ body header .logout button {
     bottom: 30px;
     opacity: 0;
   }
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert {
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }

@@ -1,10 +1,16 @@
 <div class="card"></div>
 <div class="card">
-  <h1 class="title">Login</h1>
+  <h1 class="title">Signup</h1>
 
-  <div id='success-message' class="alert alert-success" style='display: none;' role="alert"> </div>
+  <div id='error-message' class="alert alert-danger" role="alert"></div>
 
   <form>
+    <div class="input-container">
+      <input type="text" id="name" required="required">
+      <label for="name">Name</label>
+      <div class="bar"></div>
+    </div>
+
     <div class="input-container">
       <input type="text" id="email" required="required">
       <label for="email">Email</label>
@@ -18,11 +24,7 @@
     </div>
 
     <div class="button-container">
-      <button><span>Go</span></button>
-    </div>
-
-    <div class="footer-login">
-      <a href='#signup'>Create Account</a>
+      <button><span>Submit</span></button>
     </div>
   </form>
 </div>
