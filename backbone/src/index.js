@@ -29,7 +29,7 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    if (!auth.attributes.auth) {
+    if (!auth.getLocalToken()) {
       Backbone.history.navigate('login', { trigger: true });
       return;
     }

@@ -1,16 +1,5 @@
 import $ from 'jquery'
 
-// let Token = function () {
-//   return {
-//     get: function () {
-//       localStorage.getItem('local_token')
-//     },
-//     set: function (value) {
-//       return localStorage.setItem('local_token', value)
-//     }
-//   }
-// }()
-
 let AuthModel = Backbone.Model.extend({
 
   urlRoot: process.env.apiHost+'/api/v1/auth_token',
@@ -26,19 +15,33 @@ let AuthModel = Backbone.Model.extend({
 
   login: function(credentials) {
     var that = this;
-    var successCallback =
-          function(data) {
-            that.set({ auth: true }); // Remove this auth property
-            // Token.set(data.attributes.token)
-            $.ajaxSetup({
-              // headers: { 'Authorization': 'Bearer '+data.attributes.token }
-              headers: { 'Authorization': data.attributes.token }
-            });
-            Backbone.history.navigate('', { trigger: true });
-          };
+    var successCallback = function(data) {
+      that.saveTokenAndGoToIndex(data.attributes.token)
+    };
 
-    this.save({ credentials: credentials }, { success: successCallback });
+    if (!this.getLocalToken()) { // Get token from api
+      this.save({ credentials: credentials }, { success: successCallback });
+    } else { // Use existing token
+      this.saveTokenAndGoToIndex(this.getLocalToken())
+    }
   },
+
+  saveTokenAndGoToIndex: function (token) {
+    this.setLocalToken(token)
+    $.ajaxSetup({
+      // headers: { 'Authorization': 'Bearer '+data.attributes.token }
+      headers: { 'Authorization': token }
+    });
+    Backbone.history.navigate('', { trigger: true });
+  },
+
+  getLocalToken: function () {
+    return localStorage.getItem('local_token')
+  },
+
+  setLocalToken: function (value) {
+    localStorage.setItem('local_token', value)
+  }
 });
 
 export default AuthModel
