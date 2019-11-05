@@ -462,6 +462,25 @@ body {
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: .25rem;
+  -webkit-animation: fadeOut 2s forwards;
+  animation: fadeOut 2s forwards;
+  -webkit-animation-delay: 5s;
+  animation-delay: 5s;
+  background: red;
+  color: white;
+  padding: 10px;
+  text-align: center;
+
+}
+
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
 }
 
 .alert-success {
