@@ -7,14 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body header .logout button {
-  position: absolute;
-  right: 10px;
-  top: 20px;
-  color: rgba(175, 47, 47, 0.7);
-  cursor: pointer;
-}
-
 .todoapp h1 {
     white-space: nowrap;
     overflow: hidden;

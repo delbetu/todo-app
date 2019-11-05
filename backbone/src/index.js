@@ -42,24 +42,15 @@ var TodoRouter = Backbone.Router.extend({
     $('nav#left-menu').replaceWith(menuItems.render().el);
 
     $('#main-content').html('');
-    $('.logout').show();
-
-    $('.logout button').on('click', function(e) {
-      session.logout();
-    });
   },
 
   login: function() {
-    $('.logout').hide()
-
     let loginView = new LoginView({ session: session })
     $('#main-content').replaceWith(loginView.render().el)
     $('#success-message').hide();
   },
 
   signup: function() {
-    $('.logout').hide();
-
     let userCollection = new UserCollection()
     let signupView = new SignupView({
       collection: userCollection,

@@ -27,16 +27,6 @@ let SessionModel = Backbone.Model.extend({
 
     this.save({ credentials: credentials }, { success: successCallback });
   },
-
-  logout: function() {
-    this.destroy({
-      success: function (model, response) {
-        model.clear();
-        model.set({ auth: false, id: null });
-      }
-    });
-    Backbone.history.navigate('login', { trigger: true });
-  },
 });
 
 export default SessionModel
