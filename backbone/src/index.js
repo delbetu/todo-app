@@ -6,14 +6,14 @@ import './stylesheets/style.css'
 import 'todomvc-app-css/index.css'
 import './favicon.ico'
 
-import SessionModel from './models/session-model.js'
+import AuthModel from './models/auth-model.js'
 import LoginView from './views/login.js'
 import GroupItemCollectionView from './views/group-item-collection-view.js'
 import GroupItemCollection from './collections/group-item-collection.js'
 import SignupView from './views/signup.js'
 import UserCollection from './collections/user-collection.js'
 
-let session;
+let auth;
 
 $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
   if (jqxhr.status === 403) {
@@ -29,7 +29,7 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    if (!session.attributes.auth) {
+    if (!auth.attributes.auth) {
       Backbone.history.navigate('login', { trigger: true });
       return;
     }
@@ -45,7 +45,7 @@ var TodoRouter = Backbone.Router.extend({
   },
 
   login: function() {
-    let loginView = new LoginView({ session: session })
+    let loginView = new LoginView({ auth: auth })
     $('#main-content').replaceWith(loginView.render().el)
     $('#success-message').hide();
   },
@@ -70,6 +70,6 @@ var TodoRouter = Backbone.Router.extend({
 
 $(document).ready(function() {
   new TodoRouter
-  session = new SessionModel()
+  auth = new AuthModel()
   Backbone.history.start()
 });

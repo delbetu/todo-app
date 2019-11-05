@@ -6,7 +6,7 @@ module.exports = {
     app: ['./src/index.js',
           './src/models/group-item-model.js',
           './src/models/item-model.js',
-          './src/models/session-model.js',
+          './src/models/auth-model.js',
           './src/collections/group-item-collection.js',
           './src/collections/item-collection.js',
           './src/views/group-item-card-view.js',

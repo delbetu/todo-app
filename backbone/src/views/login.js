@@ -1,4 +1,4 @@
-import SessionModel from '../models/session-model.js'
+import AuthModel from '../models/auth-model.js'
 
 let LoginView = Backbone.View.extend({
   template: require("../templates/login.html"),
@@ -19,7 +19,7 @@ let LoginView = Backbone.View.extend({
     e.preventDefault();
 
     var credentials = { email: this.$('#email').val(), password: this.$('#password').val() };
-    this.options.session.login(credentials);
+    this.options.auth.login(credentials);
   },
 
   render: function() {

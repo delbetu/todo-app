@@ -1,6 +1,17 @@
 import $ from 'jquery'
 
-let SessionModel = Backbone.Model.extend({
+// let Token = function () {
+//   return {
+//     get: function () {
+//       localStorage.getItem('local_token')
+//     },
+//     set: function (value) {
+//       return localStorage.setItem('local_token', value)
+//     }
+//   }
+// }()
+
+let AuthModel = Backbone.Model.extend({
 
   urlRoot: process.env.apiHost+'/api/v1/auth_token',
 
@@ -17,7 +28,8 @@ let SessionModel = Backbone.Model.extend({
     var that = this;
     var successCallback =
           function(data) {
-            that.set({ auth: true });
+            that.set({ auth: true }); // Remove this auth property
+            // Token.set(data.attributes.token)
             $.ajaxSetup({
               // headers: { 'Authorization': 'Bearer '+data.attributes.token }
               headers: { 'Authorization': data.attributes.token }
@@ -29,4 +41,4 @@ let SessionModel = Backbone.Model.extend({
   },
 });
 
-export default SessionModel
+export default AuthModel
