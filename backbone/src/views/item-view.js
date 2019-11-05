@@ -15,8 +15,11 @@ let ItemView = Backbone.View.extend({
   },
 
   clear: function() {
-    this.model.destroy();
-    this.remove();
+    var answer = window.confirm("Are you sure?")
+    if (answer) {
+      this.model.destroy();
+      this.remove();
+    }
   },
 
   render: function() {

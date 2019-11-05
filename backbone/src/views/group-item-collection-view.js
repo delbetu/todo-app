@@ -36,7 +36,7 @@ let GroupItemCollectionView = Backbone.View.extend({
   },
 
   groupItemSelectedCallback: function(element) {
-    this.$el.find('.nav__item').removeClass('current');
+    this.$el.find('.list_item').removeClass('current');
     $(element).addClass('current');
   },
 

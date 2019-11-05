@@ -3,13 +3,28 @@
   width:300px;
   height:100vh;
   top:0;
-  left:-315px;
+  left:0;
   padding-top:47px;
   background-color: rgba(29, 33, 32, 1);
   transition:all .5s ease;
+  z-index: 100;
 }
 
-.nav__item {
+.create {
+  text-align: center;
+}
+.task-list-title {
+  color: white;
+  font-size: 24px;
+}
+
+.task-list-creation-input {
+  font-size: 20px;
+  padding: 5px;
+  margin: 1em;
+}
+
+.list_item {
   display:block;
   width:96%;
   margin:0 auto;
@@ -20,14 +35,19 @@
   border-bottom:.5px solid rgba(59, 62, 61, 1);
   border-top:.5px solid rgba(59, 62, 61, 1);
   background-color:transparent;
-  text-align:center;
+  text-align:left;
   color:rgba(221, 231, 228, 1);
 }
 
-.nav__item label{
+.list_item label{
   width: 245px;
   display: block;
   word-wrap: break-word;
+}
+
+.list_item label:hover {
+  color: orange;
+  cursor: pointer;
 }
 
 .current:before {
@@ -39,7 +59,7 @@
   border-left:15px solid #1D2120;
   border-bottom:17px solid transparent;
   top:0px;
-  right:-25px;
+  right:-20px;
   z-index:4000;
 }
 
@@ -51,46 +71,6 @@
   top:.5px;
   right:-21px;
   z-index:4000;
-}
-
-.menu-toogle {
-  position:absolute;
-  width: 35px;
-  line-height:1.1;
-  text-align:center;
-  top:6.5px;
-  left: 8px;
-  border-radius:3px;
-  background-color: #142b25;
-  transition: all .5s ease;
-  z-index:4000;
-}
-
-.menu-toogle::before {
-  content:"☰";
-  font-size:32px;
-  color:white;
-}
-
-/* Menu behavior */
-.checkbox {
-  display:none;
-}
-
-.checkbox:checked ~ .nav {
-  left:0px;
-  position:fixed;
-}
-
-@media screen and (max-width: 1000px) {
-  .checkbox:checked ~ #main-content {
-    margin-left:270px;
-  }
-}
-
-.checkbox:checked ~ .menu-toogle {
-  left:245px;
-  position:fixed;
 }
 
 /* Destroy button */

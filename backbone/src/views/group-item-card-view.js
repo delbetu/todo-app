@@ -4,7 +4,7 @@ import GroupItemView from './group-item-view.js'
 let GroupItemCardView = Backbone.View.extend({
   template: require("../templates/group-item-card.html" ),
 
-  className: 'nav__item',
+  className: 'list_item',
 
   events: {
     'click .destroy' : 'clear',
@@ -23,8 +23,11 @@ let GroupItemCardView = Backbone.View.extend({
   },
 
   clear: function() {
-    this.model.destroy();
-    this.remove();
+    var answer = window.confirm("Deleting a list will destroy all its items. Are you sure?")
+    if (answer) {
+      this.model.destroy();
+      this.remove();
+    }
   },
 
   render: function() {
