@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/702c1e5f4821d90ed46c/maintainability)](https://codeclimate.com/github/delbetu/todo-app/maintainability)
+
 # Todo app
 
 Achieve your goals by planning with todo's lists.  
