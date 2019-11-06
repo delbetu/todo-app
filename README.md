@@ -58,16 +58,16 @@ Follows a UseCase oriented architecture see [wiki:architecture](https://github.c
 
 #### Why this architecture is awesome?
 * Core implementation allows the separation of functionality and framework(low level details)
->> * Functionality is coded in only one place which makes it easier to mantain ( is not spreaded over random parts of code )
->> * Controllers communicate with Core just by sending/receiveing data transfer objects ( this implements `the separation` )
->> * It would be easy to change from Rails to Sinatra+Data-Mapper
->> * It allows outside-in TDD
+> * Functionality is coded in only one place which makes it easier to mantain ( is not spreaded over random parts of code )
+> * Controllers communicate with Core just by sending/receiveing data transfer objects ( this implements `the separation` )
+> * It would be easy to change from Rails to Sinatra+Data-Mapper
+> * It allows outside-in TDD
 * Core is easier to change
->> * Core tests run fast! they do not deppend on rails
->> * Core contracts are clearly specified
->> * When developing core your mind is focused on functionality, so you can think more on possible test cases making your code more robust
+> * Core tests run fast! they do not deppend on rails
+> * Core contracts are clearly specified
+> * When developing core your mind is focused on functionality, so you can think more on possible test cases making your code more robust
 * Configurable code
->> * Authentication use a simple role based strategy which is easy to extend new roles by perms configuration
+> * Authentication use a simple role based strategy which is easy to extend new roles by perms configuration
 
 ## API
 Every request must use content type application/json
