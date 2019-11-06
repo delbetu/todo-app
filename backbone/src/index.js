@@ -30,8 +30,10 @@ var TodoRouter = Backbone.Router.extend({
 
   index: function() {
     if (!auth.getLocalToken()) {
-      Backbone.history.navigate('login', { trigger: true });
-      return;
+      Backbone.history.navigate('login', { trigger: true })
+      return
+    } else {
+      auth.setTokenForAllRequests()
     }
 
     var menuItems = new GroupItemCollectionView({

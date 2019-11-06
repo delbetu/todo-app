@@ -14,12 +14,12 @@ let AuthModel = Backbone.Model.extend({
   },
 
   login: function(credentials) {
-    var that = this;
-    var successCallback = function(data) {
+    let that = this;
+    let successCallback = function(data) {
       that.saveTokenAndGoToIndex(data.attributes.token)
     };
 
-    if (!this.getLocalToken()) { // Get token from api
+    if (this.getLocalToken() == null) { // Get token from api
       this.save({ credentials: credentials }, { success: successCallback });
     } else { // Use existing token
       this.saveTokenAndGoToIndex(this.getLocalToken())
@@ -28,15 +28,20 @@ let AuthModel = Backbone.Model.extend({
 
   saveTokenAndGoToIndex: function (token) {
     this.setLocalToken(token)
-    $.ajaxSetup({
-      // headers: { 'Authorization': 'Bearer '+data.attributes.token }
-      headers: { 'Authorization': token }
-    });
     Backbone.history.navigate('', { trigger: true });
   },
 
+  setTokenForAllRequests: function () {
+    $.ajaxSetup({
+      // headers: { 'Authorization': 'Bearer '+data.attributes.token }
+      headers: { 'Authorization': this.getLocalToken() }
+    });
+  },
+
   getLocalToken: function () {
-    return localStorage.getItem('local_token')
+    let localToken = localStorage.getItem('local_token')
+    let noTokenSaved = localToken == "null" || localToken == undefined
+    return (noTokenSaved) ?  null : localToken
   },
 
   setLocalToken: function (value) {

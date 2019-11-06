@@ -23,24 +23,25 @@ let GroupItemView = Backbone.View.extend({
   },
 
   createOnEnter: function(e) {
-    if (e.which !== ENTER_KEY) return;
+    if (e.which !== ENTER_KEY) return
 
-    var newItemInput = this.$('input.new-todo');
-    if (newItemInput.val() === '') return;
+    var newItemInput = this.$('input.new-todo')
+    if (newItemInput.val() === '') return
 
-    this.collection.create({ title: newItemInput.val() });
-    newItemInput.val('');
+    this.collection.create({ title: newItemInput.val() })
+    newItemInput.val('')
   },
 
   render: function() {
     var $template = $(_.template(this.template)({ title: this.title }));
 
     this.collection.each(function(todo) {
-      var item = new ItemView({ model: todo });
-      $template.find('.todo-list').append(item.render().el);
+      var item = new ItemView({ model: todo })
+      $template.find('.todo-list').append(item.render().el)
     });
 
-    this.$el.html($template);
+    this.$el.html($template)
+    this.$el.find('input.new-todo').focus()
     return this;
   }
 });
