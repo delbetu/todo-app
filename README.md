@@ -1,6 +1,12 @@
 # Todo app
 
+Achieve your goals by planning with todo's lists.  
 Single page application with frontend and backend implementation which allows creation of tasks and lists of tasks, along with destroying and mark them as completed.  
+
+# Demo
+
+Visit [https://todo--backbone.herokuapp.com/](https://todo--backbone.herokuapp.com/) to see it working.
+![Screenshot](screenshot.png)
 
 ## Pre-requisites
 * Node >= 8.16.1
@@ -23,14 +29,15 @@ rails server
 cd frontend
 npm install
 npm run build
-npm start
+npm run dev
 ```
 
 Visit http://localhost:8080
 
-Available users:
-* admin@todo.com admin
-* user@todo.com user
+# Functionality
+An anonymous user can create account.  
+User can login and manage their tasks into lists and items.  
+Those tasks can be marked as completed and can be deleted.  
 
 ## Used technologies
 ### Frontend
@@ -44,19 +51,30 @@ Available users:
 * JWT authentication
 * Rspec
 
-## Functionalities
+#### Architecture
+Follows a UseCase oriented architecture see [wiki:architecture](https://github.com/delbetu/todo-app/wiki/Architecture)
 
-User can login and organize their tasks into lists and items.  
-A list of tasks is called `GroupItem`  
-And a task is called `Item`  
+#### Why this architecture is awesome?
+* Core implementation allows the separation of functionality and framework(low level details)
+>> * Functionality is coded in only one place which makes it easier to mantain ( is not spreaded over random parts of code )
+>> * Controllers communicate with Core just by sending/receiveing data transfer objects ( this implements `the separation` )
+>> * It would be easy to change from Rails to Sinatra+Data-Mapper
+>> * It allows outside-in TDD
+* Core is easier to change
+>> * Core tests run fast! they do not deppend on rails
+>> * Core contracts are clearly specified
+>> * When developing core your mind is focused on functionality, so you can think more on possible test cases making your code more robust
+* Configurable code
+>> * Authentication use a simple role based strategy which is easy to extend new roles by perms configuration
 
-A `User` has many `GroupItem` and  
-A `GroupItem` has many `Items`
+## API
+Every request must use content type application/json
+Endpoints under /group_items/** need authentication so you need to attach `Authorization` header with provided token.
 
-## Endpoints ( Curl examples )
+## Endpoints (Curl examples)
 | Description             | Rails-Endpoint                                         | Backbone call                 |
 |-------------------------|--------------------------------------------------------|-------------------------------|
-| Get auth token          | POST   /api/v1/auth_token                              |ajax call                      |
+| Get auth token          | POST   /api/v1/auth_token                              |auth-model.login()             |
 | Fetch items for a group | GET    /api/v1/group_items/:group_item_id/items        |group-item-collection.fetch(); |
 | Create item for a group | POST   /api/v1/group_items/:group_item_id/items        |group-item-collection.create();|
 | Get item for a group    | GET    /api/v1/group_items/:group_item_id/items/:id    |item-model.fetch();            |
@@ -66,9 +84,6 @@ A `GroupItem` has many `Items`
 | Create group item       | POST    /api/v1/group_items/                           |item-collection.create()       |
 | Update group item       | PUT    /api/v1/group_items/:id                         |group-item-model.save();       |
 | Delete group item       | DELETE /api/v1/group_items/:id                         |group-item-model.destroy();    |
-
-### API
-Every request must use content type application/json
 
 #### Authorization
 Get token for existing user from email and password.
@@ -135,8 +150,12 @@ curl -i -X DELETE \
 
 ## Pending tasks
 
-* Add start/stop button to task so you can track time of each task
-* Remove already done tasks at the beginning of the day
-* Add facebook authentication
-* Add capistrano to allow deploying
-* Refactor html + css
+* Allow filtering completed/pending tasks
+* Double click over each item to edit its text
+* Add `notes` to each item
+* Add google Signup/Signin
+* Create a chrome extension client
+
+## Possible future features
+* Share with other users
+* Assign tasks to other people
