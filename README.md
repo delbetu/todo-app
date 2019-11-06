@@ -6,7 +6,7 @@ Single page application with frontend and backend implementation which allows cr
 # Demo
 
 Visit [https://todo--backbone.herokuapp.com/](https://todo--backbone.herokuapp.com/) to see it working.
-![Screenshot](screenshot.png {width=150px height=150px})
+<img src="screenshot.png" width="550" height="300">
 
 ## Pre-requisites
 * Node >= 8.16.1
