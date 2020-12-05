@@ -6,9 +6,10 @@ Achieve your goals by planning with todo's lists.
 Single page application with frontend and backend implementation which allows creation of tasks and lists of tasks, along with destroying and mark them as completed.  
 
 # Demo
+<img src="todo-tasks.gif" width="700" height="400">
 
+# Live
 Visit [https://todo--backbone.herokuapp.com/](https://todo--backbone.herokuapp.com/) to see it working.
-<img src="screenshot.png" width="550" height="300">
 
 ## Pre-requisites
 * Node >= 8.16.1
